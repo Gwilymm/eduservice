@@ -20,7 +20,23 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
-<style scoped>
+<style>
+@font-face {
+  font-family: 'HomemadeApple';
+  src: url('@/assets/fonts/HomemadeApple-Regular.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'NeoSansStd';
+  src: url('@/assets/fonts/Neo-Sans-Std-Medium.woff') format("woff");
+}
+
+body{
+  font-family: NeoSansStd;
+}
+h1 {
+  font-family: HomemadeApple;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
