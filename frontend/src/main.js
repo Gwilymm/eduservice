@@ -14,7 +14,18 @@ const app = createApp(App)
 const vuetify = createVuetify({
     components,
     directives,
-  })
+    theme: {
+      defaultTheme: 'light',
+      themes: {
+        light: {
+          colors: {
+            primary:"#001E34",
+            secondary: "#4CB0D4",
+          }
+        }
+      }
+    }
+})
 
 app.use(createPinia())
 app.use(router)
