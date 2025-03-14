@@ -180,3 +180,35 @@ classDiagram
     Classement "1" --> "1" Challenge : lié à
 ```
 
+
+### ✅ Phase 5 : Optimisation des Performances & Indexation 🚀  
+
+Nous avons maintenant optimisé la base de données pour **assurer des requêtes rapides et éviter les ralentissements**.  
+
+---
+
+## 📌 **Indexation recommandée**  
+L’indexation permet d’**accélérer les requêtes** en optimisant les champs fréquemment utilisés dans les **recherches, tris et filtres**.
+
+| Table                   | Champ à indexer            | Raison                                                       |
+| ----------------------- | -------------------------- | ------------------------------------------------------------ |
+| **User**                | `email_personnel (unique)` | Recherche rapide des utilisateurs & authentification         |
+| **User**                | `ecole_id`                 | Filtrage rapide des ambassadeurs par école                   |
+| **User**                | `role`                     | Différenciation rapide entre ambassadeurs et administrateurs |
+| **Mission_Ambassadeur** | `ambassadeur_id`           | Accélération de la récupération des missions par ambassadeur |
+| **Mission_Ambassadeur** | `mission_id`               | Optimisation des requêtes de validation des missions         |
+| **Mission_Ambassadeur** | `status`                   | Recherche rapide des missions en attente/validées/refusées   |
+| **Mission_Ambassadeur** | `date_soumission`          | Affichage rapide des missions récentes                       |
+| **Mission**             | `challenge_id`             | Filtrage des missions par année scolaire                     |
+| **Mission**             | `max_repetitions`          | Filtrage rapide des missions répétables                      |
+| **Classement**          | `challenge_id`             | Accélération des calculs de classement par année             |
+| **Classement**          | `points_total`             | Tri rapide des classements par score                         |
+
+---
+
+## 📌 **Optimisations supplémentaires**
+✅ **Foreign Keys (FK) bien définies** pour **assurer l’intégrité des données**  
+✅ **Utilisation de `TEXT` pour `justification_refus`**, évitant les limitations de `VARCHAR`  
+✅ **Compression des index sur les gros champs (`email_personnel`, `nom`)** pour **économiser de l’espace**  
+✅ **Stockage des fichiers en dehors de la BDD** pour **éviter d’alourdir les requêtes**  
+
