@@ -1,13 +1,13 @@
 meta {
-  name: login
+  name: Creates a user token.
   type: http
-  seq: 2
+  seq: 1
 }
 
 post {
-  url: https://localhost/api/login
+  url: {{baseUrl}}/api/login
   body: json
-  auth: inherit
+  auth: none
 }
 
 body:json {
@@ -15,5 +15,4 @@ body:json {
     "email": "admin@admin.fr",
     "password": "admin"
   }
-  
 }
