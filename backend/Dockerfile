@@ -14,6 +14,10 @@ RUN install-php-extensions \
 	intl \
 	zip \
 	opcache
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Installer les dépendances PHP
+RUN composer install --no-dev --no-scripts --no-progress --prefer-dist
 
 # Copier le reste du projet dans le conteneur
 COPY . /app/
