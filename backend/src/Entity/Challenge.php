@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ChallengeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChallengeRepository::class)]
@@ -31,6 +32,12 @@ class Challenge
      */
     #[ORM\OneToMany(targetEntity: Ranking::class, mappedBy: 'challenge')]
     private Collection $rankings;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $missionEnd = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $sponsorshipEnd = null;
 
     public function __construct()
     {
@@ -111,6 +118,30 @@ class Challenge
                 $ranking->setChallenge(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMissionEnd(): ?\DateTimeInterface
+    {
+        return $this->missionEnd;
+    }
+
+    public function setMissionEnd(\DateTimeInterface $missionEnd): static
+    {
+        $this->missionEnd = $missionEnd;
+
+        return $this;
+    }
+
+    public function getSponsorshipEnd(): ?\DateTimeInterface
+    {
+        return $this->sponsorshipEnd;
+    }
+
+    public function setSponsorshipEnd(\DateTimeInterface $sponsorshipEnd): static
+    {
+        $this->sponsorshipEnd = $sponsorshipEnd;
 
         return $this;
     }

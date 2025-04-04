@@ -5,7 +5,15 @@ meta {
 }
 
 post {
-  url: http://localhost:8000/api/login
-  body: none
+  url: https://localhost/api/login
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "email": "admin@admin.fr",
+    "password": "admin"
+  }
+  
 }
