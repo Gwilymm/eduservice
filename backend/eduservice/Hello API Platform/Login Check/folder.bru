@@ -1,0 +1,7 @@
+meta {
+  name: Login Check
+}
+
+script:post-response {
+  bru.setEnvVar("Bearer","Bearer "+ res.body.token);
+}

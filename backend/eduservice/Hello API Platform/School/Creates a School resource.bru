@@ -6,8 +6,14 @@ meta {
 
 post {
   url: {{baseUrl}}/api/schools
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "My Digital School"
+  }
 }
 
 script:post-response {
@@ -16,5 +22,11 @@ script:post-response {
   if (res.status === 400) {
   }
   if (res.status === 422) {
+  }
+}
+
+docs {
+  {
+    "name": "string"
   }
 }

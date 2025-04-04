@@ -7,9 +7,17 @@ meta {
 get {
   url: {{baseUrl}}/api/users
   body: none
-  auth: none
+  auth: bearer
 }
 
 params:query {
   ~page: 
+}
+
+headers {
+  Authorization: {{Bearer}}
+}
+
+auth:bearer {
+  token: {{Bearer}}
 }
