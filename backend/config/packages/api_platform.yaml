@@ -1,11 +1,17 @@
 api_platform:
-    title: Hello API Platform
-    version: 1.0.0
-    defaults:
-        stateless: true
-        cache_headers:
-            vary: ['Content-Type', 'Authorization', 'Origin']
-    formats:
-        jsonld: ['application/ld+json']
-        json: ['application/json']
-        
+  title: Hello API Platform
+  version: 1.0.0
+  enable_swagger: true
+  enable_swagger_ui: true
+  enable_re_doc: true
+  swagger:
+    versions: [3]
+  defaults:
+    stateless: true
+    cache_headers:
+      vary: ["Content-Type", "Authorization", "Origin"]
+  formats:
+    jsonld: ["application/ld+json"]
+    json: ["application/json"]
+    jsonopenapi: ["application/vnd.openapi+json"]
+    jsonschema: ["application/schema+json"]

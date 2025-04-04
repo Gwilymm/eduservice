@@ -1,0 +1,15 @@
+meta {
+  name: Retrieves the collection of Ranking resources.
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/rankings
+  body: none
+  auth: none
+}
+
+params:query {
+  ~page: 
+}
