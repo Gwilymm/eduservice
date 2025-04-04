@@ -6,12 +6,22 @@ meta {
 
 patch {
   url: {{baseUrl}}/api/users/:id
-  body: none
+  body: json
   auth: none
 }
 
 params:path {
-  id: 
+  id: 4
+}
+
+headers {
+  content-type: application/merge-patch+json
+}
+
+body:json {
+  {
+    "school" :[1]
+  }
 }
 
 script:post-response {

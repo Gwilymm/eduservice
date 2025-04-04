@@ -2,27 +2,47 @@
 
 namespace App\Entity;
 
+use App\Entity\Mission;
+use App\Entity\Ranking;
+use App\Dto\Input\UserInput;
 use App\State\UserProcessor;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\MissionSubmission;
 use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-#[ApiResource(
-    operations: [
-        new \ApiPlatform\Metadata\Post(
-            uriTemplate: '/register',
-            security: "is_granted('PUBLIC_ACCESS')",
-            processor: UserProcessor::class
-        )
-    ]
-)]
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[ApiResource()]
+#[ApiResource(
+    security: "is_granted('ROLE_ADMIN')",
+    operations: [
+        new Post(
+            uriTemplate: '/register',
+            security: "is_granted('PUBLIC_ACCESS')",
+            input: UserInput::class,
+            processor: UserProcessor::class,
+            denormalizationContext: ['groups' => ['user:write']],
+            output: false, // ✅ AUCUNE REPONSE DOCUMENTÉE
+            description: 'Création d\'un ambassadeur avec un ID d\'école.'
+        ),
+        new Get(),                // GET /api/users/{id}
+        new GetCollection(),      // GET /api/users
+        new Patch(),              // PATCH /api/users/{id}
+        new Delete(),
+    ]
+)]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -51,8 +71,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $shcoolName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
@@ -74,6 +92,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Ranking::class, mappedBy: 'ambassador')]
     private Collection $rankings;
+
+    #[ORM\ManyToOne]
+    private ?School $school = null;
 
     public function __construct()
     {
@@ -181,17 +202,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getShcoolName(): ?string
-    {
-        return $this->shcoolName;
-    }
-
-    public function setShcoolName(?string $shcoolName): static
-    {
-        $this->shcoolName = $shcoolName;
-
-        return $this;
-    }
 
     public function getPhoneNumber(): ?string
     {
@@ -293,5 +303,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): static
+    {
+        $this->school = $school;
+
+        return $this;
+    }
+
+    #[Groups(['user:read'])]
+    public function getSchoolName(): ?string
+    {
+        return $this->school?->getName();
     }
 }
