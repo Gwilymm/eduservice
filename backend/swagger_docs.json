@@ -1,8 +1,8 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Hello API Platform",
-        "description": "",
+        "title": "Eduservice API",
+        "description": "API for Eduservice Ambassador Management",
         "version": "1.0.0"
     },
     "servers": [
@@ -2631,28 +2631,20 @@
                     "User"
                 ],
                 "responses": {
-                    "201": {
+                    "204": {
                         "description": "User resource created",
                         "content": {
                             "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonld"
-                                }
+                                "schema": {}
                             },
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
-                                }
+                                "schema": {}
                             },
                             "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonopenapi"
-                                }
+                                "schema": {}
                             },
                             "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonschema"
-                                }
+                                "schema": {}
                             }
                         },
                         "links": {}
@@ -2729,22 +2721,22 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User.jsonld"
+                                "$ref": "#/components/schemas/User.UserInput.jsonld-user.write"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/User.UserInput-user.write"
                             }
                         },
                         "application/vnd.openapi+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User.jsonopenapi"
+                                "$ref": "#/components/schemas/User.UserInput.jsonopenapi-user.write"
                             }
                         },
                         "application/schema+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User.jsonschema"
+                                "$ref": "#/components/schemas/User.UserInput.jsonschema-user.write"
                             }
                         }
                     },
@@ -2881,6 +2873,27 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error.jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "links": {}
                     }
                 },
                 "summary": "Retrieves the collection of User resources.",
@@ -2902,112 +2915,6 @@
                         "allowReserved": false
                     }
                 ],
-                "deprecated": false
-            },
-            "post": {
-                "operationId": "api_users_post",
-                "tags": [
-                    "User"
-                ],
-                "responses": {
-                    "201": {
-                        "description": "User resource created",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonschema"
-                                }
-                            }
-                        },
-                        "links": {}
-                    },
-                    "400": {
-                        "description": "Invalid input",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error.jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        },
-                        "links": {}
-                    },
-                    "422": {
-                        "description": "An error occurred",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ConstraintViolation.jsonld-jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ConstraintViolation-json"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ConstraintViolation-json"
-                                }
-                            }
-                        },
-                        "links": {}
-                    }
-                },
-                "summary": "Creates a User resource.",
-                "description": "Creates a User resource.",
-                "parameters": [],
-                "requestBody": {
-                    "description": "The new User resource",
-                    "content": {
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.jsonld"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.jsonschema"
-                            }
-                        }
-                    },
-                    "required": true
-                },
                 "deprecated": false
             }
         },
@@ -3042,6 +2949,27 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error.jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "links": {}
                     },
                     "404": {
                         "description": "Not found",
@@ -3093,6 +3021,27 @@
                 "responses": {
                     "204": {
                         "description": "User resource deleted"
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error.jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "links": {}
                     },
                     "404": {
                         "description": "Not found",
@@ -3205,6 +3154,27 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ConstraintViolation-json"
+                                }
+                            }
+                        },
+                        "links": {}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error.jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
                                 }
                             }
                         },
@@ -4394,6 +4364,150 @@
                     }
                 }
             },
+            "Rankings.RankingOutput": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "rank": {
+                        "type": "integer"
+                    },
+                    "ambassadorFullName": {
+                        "type": "string"
+                    },
+                    "points": {
+                        "type": "integer"
+                    },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "schoolYear": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "rewards": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Rankings.RankingOutput.jsonld": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "rank": {
+                        "type": "integer"
+                    },
+                    "ambassadorFullName": {
+                        "type": "string"
+                    },
+                    "points": {
+                        "type": "integer"
+                    },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "schoolYear": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "rewards": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Rankings.RankingOutput.jsonopenapi": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "rank": {
+                        "type": "integer"
+                    },
+                    "ambassadorFullName": {
+                        "type": "string"
+                    },
+                    "points": {
+                        "type": "integer"
+                    },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "schoolYear": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "rewards": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Rankings.RankingOutput.jsonschema": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "rank": {
+                        "type": "integer"
+                    },
+                    "ambassadorFullName": {
+                        "type": "string"
+                    },
+                    "points": {
+                        "type": "integer"
+                    },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "schoolYear": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "rewards": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "School": {
                 "type": "object",
                 "description": "",
@@ -4514,12 +4628,6 @@
                     "lastName": {
                         "type": "string"
                     },
-                    "shcoolName": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
                     "phoneNumber": {
                         "type": [
                             "string",
@@ -4550,12 +4658,151 @@
                             "example": "https://example.com/"
                         }
                     },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "iri-reference",
+                        "example": "https://example.com/"
+                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
+                    },
+                    "schoolName": {
+                        "readOnly": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
+            },
+            "User.UserInput-user.write": {
+                "type": "object",
+                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "deprecated": false,
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "school": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "school"
+                ]
+            },
+            "User.UserInput.jsonld-user.write": {
+                "type": "object",
+                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "deprecated": false,
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "school": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "school"
+                ]
+            },
+            "User.UserInput.jsonopenapi-user.write": {
+                "type": "object",
+                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "deprecated": false,
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "school": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "school"
+                ]
+            },
+            "User.UserInput.jsonschema-user.write": {
+                "type": "object",
+                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "deprecated": false,
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "school": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "school"
+                ]
             },
             "User.jsonld": {
                 "type": "object",
@@ -4621,12 +4868,6 @@
                     "lastName": {
                         "type": "string"
                     },
-                    "shcoolName": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
                     "phoneNumber": {
                         "type": [
                             "string",
@@ -4657,10 +4898,25 @@
                             "example": "https://example.com/"
                         }
                     },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "iri-reference",
+                        "example": "https://example.com/"
+                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
+                    },
+                    "schoolName": {
+                        "readOnly": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
             },
@@ -4693,12 +4949,6 @@
                     "lastName": {
                         "type": "string"
                     },
-                    "shcoolName": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
                     "phoneNumber": {
                         "type": [
                             "string",
@@ -4729,10 +4979,25 @@
                             "example": "https://example.com/"
                         }
                     },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "iri-reference",
+                        "example": "https://example.com/"
+                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
+                    },
+                    "schoolName": {
+                        "readOnly": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
             },
@@ -4765,12 +5030,6 @@
                     "lastName": {
                         "type": "string"
                     },
-                    "shcoolName": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
                     "phoneNumber": {
                         "type": [
                             "string",
@@ -4801,10 +5060,25 @@
                             "example": "https://example.com/"
                         }
                     },
+                    "school": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "iri-reference",
+                        "example": "https://example.com/"
+                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
+                    },
+                    "schoolName": {
+                        "readOnly": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
             }
@@ -4824,6 +5098,9 @@
     },
     "security": [],
     "tags": [
+        {
+            "name": "Rankings"
+        },
         {
             "name": "Challenge"
         },
