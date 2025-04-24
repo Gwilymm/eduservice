@@ -1,5 +1,6 @@
 api_platform:
-  title: Hello API Platform
+  title: Eduservice API
+  description: API for Eduservice Ambassador Management
   version: 1.0.0
   enable_swagger: true
   enable_swagger_ui: true
