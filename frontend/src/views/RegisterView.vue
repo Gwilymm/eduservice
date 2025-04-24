@@ -52,17 +52,10 @@
               <v-card>
                 <v-card-title>Missions souhaitées</v-card-title>
                 <v-card-text>
-                  <v-checkbox 
-                    v-for="mission in missions" 
-                    :key="mission" 
-                    v-model="form.missions" 
-                    :label="mission"
-                    :value="mission" 
-                    color="primary"
-                    hide-details
-                    class="mission-checkbox"
-                    >
-                  </v-checkbox>
+                  <div v-for="mission in form.selectedMissions" :key="mission.id">
+                    <v-checkbox v-model="mission.isCompleted" :label="mission.title" color="red"
+                      @change="updateSelectedMissions"></v-checkbox>
+                  </div>
                 </v-card-text>
               </v-card>
             </template>
@@ -102,7 +95,16 @@ const form = ref({
   email: '',
   schoolEmail: '',
   phone: '',
-  missions: [],
+  selectedMissions: [
+    { id: 1, title: 'Communiquer sur les RS', isCompleted: false },
+    { id: 2, title: 'Poster des avis', isCompleted: false },
+    { id: 3, title: 'Participer à des TikTok', isCompleted: false },
+    { id: 4, title: 'Livrer votre témoignage', isCompleted: false },
+    { id: 5, title: 'Participer à un shooting photos', isCompleted: false },
+    { id: 6, title: 'Intervenir dans votre ancien établissement', isCompleted: false },
+    { id: 7, title: 'Participer à des événements', isCompleted: false },
+    { id: 8, title: 'Parrainer des futurs étudiants', isCompleted: false }
+  ],
 });
 
 const schools = [
@@ -115,16 +117,16 @@ const schools = [
   "L'École internationale TUNON"
 ];
 
-const missions = [
-  'Communiquer sur les RS',
-  'Poster des avis',
-  'Participer à des TikTok',
-  'Livrer votre témoignage',
-  'Participer à un shooting photos',
-  'Intervenir dans votre ancien établissement',
-  'Participer à des événements',
-  'Parrainer des futurs étudiants'
-];
+// const missionsData = [
+//   { id: 1, title: 'Communiquer sur les RS', isCompleted: false },
+//   { id: 2, title: 'Poster des avis', isCompleted: false },
+//   { id: 3, title: 'Participer à des TikTok', isCompleted: false },
+//   { id: 4, title: 'Livrer votre témoignage', isCompleted: false },
+//   { id: 5, title: 'Participer à un shooting photos', isCompleted: false },
+//   { id: 6, title: 'Intervenir dans votre ancien établissement', isCompleted: false },
+//   { id: 7, title: 'Participer à des événements', isCompleted: false },
+//   { id: 8, title: 'Parrainer des futurs étudiants', isCompleted: false }
+// ];
 
 
 const rules = {
@@ -150,28 +152,28 @@ function prevStep() {
 }
 
 
+function updateSelectedMissions() {
+  form.value.selectedMissions = form.value.selectedMissions.map(mission => ({
+    ...mission,
+    isCompleted: mission.isCompleted,
+  }));
+}
+
+
 function submitForm() {
   formRef.value.validate().then((valid) => {
     if (valid) {
-      console.log('Formulaire soumis avec :', form.value);
+      const formData = {
+        ...form.value,
+        missions: missionsData
+          .filter(mission => mission.isCompleted)
+          .map(mission => mission.title)
+      };
+
+      console.log('Formulaire soumis avec :', formData);
       alert('Formulaire validé avec succès !');
     }
   });
 }
 </script>
 
-<style scoped>
-.mission-checkbox {
-  margin-bottom: 8px;
-}
-
-:deep(.v-checkbox__control) {
-  opacity: 1;
-  visibility: visible;
-}
-
-:deep(.v-selection-control) {
-  opacity: 1;
-  min-height: 40px;
-}
-</style>
