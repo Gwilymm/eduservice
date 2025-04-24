@@ -2,46 +2,55 @@
 
 namespace App\State;
 
-use App\Dto\Input\UserInput;
-use App\Entity\User;
-use App\Repository\SchoolRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserProcessor implements ProcessorInterface
 {
-    public function __construct(
-        private EntityManagerInterface $em,
-        private UserPasswordHasherInterface $passwordHasher,
-        private SchoolRepository $schoolRepo
-    ) {}
+	private EntityManagerInterface $entityManager;
+	private UserPasswordHasherInterface $passwordHasher;
+	private ValidatorInterface $validator;
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): User
-    {
-        assert($data instanceof UserInput);
+	public function __construct(
+		EntityManagerInterface $entityManager,
+		UserPasswordHasherInterface $passwordHasher,
+		ValidatorInterface $validator
+	) {
+		$this->entityManager = $entityManager;
+		$this->passwordHasher = $passwordHasher;
+		$this->validator = $validator;
+	}
 
-        $user = new User();
-        $user->setEmail($data->email);
-        $user->setFirstName($data->firstName);
-        $user->setLastName($data->lastName);
-        $user->setPhoneNumber($data->phoneNumber);
-        $user->setRoles(['ROLE_AMBASSADOR']);
-        $user->setPassword(
-            $this->passwordHasher->hashPassword($user, $data->password)
-        );
+	public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
+	{
+		if (!$data instanceof User) {
+			throw new BadRequestHttpException("Invalid user data");
+		}
 
-        $school = $this->schoolRepo->find($data->school);
-        if (!$school) {
-            throw new \InvalidArgumentException('School ID is invalid');
-        }
+		$errors = $this->validator->validate($data);
+		if (count($errors) > 0) {
+			throw new BadRequestHttpException((string) $errors);
+		}
 
-        $user->setSchool($school);
+		if ($data->getSchoolId()) {
+			$school = $this->entityManager->getRepository(\App\Entity\School::class)->find($data->getSchoolId());
+			if (!$school) {
+				throw new BadRequestHttpException("Invalid school ID: " . $data->getSchoolId());
+			}
+			$data->setSchool($school);
+		}
 
-        $this->em->persist($user);
-        $this->em->flush();
+		// Hacher le mot de passe avant de sauvegarders
+		$data->setPassword($this->passwordHasher->hashPassword($data, $data->getPassword()));
 
-        return $user;
-    }
+		$this->entityManager->persist($data);
+		$this->entityManager->flush();
+
+		return $data; // 🔥 Ajouté pour que API Platform retourne l'utilisateur en JSON
+	}
 }

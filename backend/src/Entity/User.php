@@ -71,7 +71,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
 
@@ -94,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $rankings;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     private ?School $school = null;
 
     public function __construct()
@@ -201,7 +201,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 
     public function getPhoneNumber(): ?string
     {
@@ -317,9 +316,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[Groups(['user:read'])]
-    public function getSchoolName(): ?string
+
+    // Ce champ n’est pas en base, juste utilisé pour la désérialisation
+    private ?int $schoolId = null;
+
+    public function getSchoolId(): ?int
     {
-        return $this->school?->getName();
+        return $this->schoolId;
+    }
+
+    public function setSchoolId(?int $schoolId): static
+    {
+        $this->schoolId = $schoolId;
+        return $this;
     }
 }
