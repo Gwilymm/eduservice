@@ -316,7 +316,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     // Ce champ n’est pas en base, juste utilisé pour la désérialisation
     private ?int $schoolId = null;
 

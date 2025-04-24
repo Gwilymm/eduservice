@@ -1,4 +1,5 @@
 import './assets/main.css'
+import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -13,19 +14,20 @@ import router from './router'
 
 const app = createApp(App)
 const vuetify = createVuetify({
-    components,
-    directives,
-    theme: {
-      defaultTheme: 'light',
-      themes: {
-        light: {
-          colors: {
-            primary:"#001E34",
-            secondary: "#4CB0D4",
-          }
+  iconfont: 'mdi',
+  components,
+  directives,
+  theme: {
+    defaultTheme: 'light',
+    themes: {
+      light: {
+        colors: {
+          primary: "#001E34",
+          secondary: "#4CB0D4",
         }
       }
     }
+  }
 })
 
 app.use(createPinia())
