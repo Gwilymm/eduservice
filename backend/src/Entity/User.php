@@ -52,9 +52,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $schoolName = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
 
     /**
@@ -74,6 +71,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Ranking::class, mappedBy: 'ambassador')]
     private Collection $rankings;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?School $school = null;
 
     public function __construct()
     {
@@ -181,18 +182,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSchoolName(): ?string
-    {
-        return $this->schoolName;
-    }
-
-    public function setSchoolName(?string $shcoolName): static
-    {
-        $this->schoolName = $shcoolName;
-
-        return $this;
-    }
-
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
@@ -291,6 +280,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $ranking->setAmbassador(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): static
+    {
+        $this->school = $school;
 
         return $this;
     }
