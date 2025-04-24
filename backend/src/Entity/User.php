@@ -15,6 +15,7 @@ use App\Entity\MissionSubmission;
 use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -34,7 +35,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             processor: UserProcessor::class,
             denormalizationContext: ['groups' => ['user:write']],
             output: false, // ✅ AUCUNE REPONSE DOCUMENTÉE
-            description: 'Création d\'un ambassadeur avec un ID d\'école.'
+            openapi: new Operation(
+                summary: 'Inscription d\'un ambassadeur',
+                description: 'Création d\'un ambassadeur'
+            ),
+
         ),
         new Get(),                // GET /api/users/{id}
         new GetCollection(),      // GET /api/users
