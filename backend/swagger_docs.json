@@ -1,8 +1,8 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Eduservice API",
-        "description": "API for Eduservice Ambassador Management",
+        "title": "Hello API Platform",
+        "description": "",
         "version": "1.0.0"
     },
     "servers": [
@@ -122,22 +122,6 @@
                                         "$ref": "#/components/schemas/Challenge"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Challenge.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Challenge.jsonschema"
-                                    }
-                                }
                             }
                         }
                     }
@@ -180,16 +164,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Challenge"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonschema"
                                 }
                             }
                         },
@@ -253,16 +227,6 @@
                             "schema": {
                                 "$ref": "#/components/schemas/Challenge"
                             }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Challenge.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Challenge.jsonschema"
-                            }
                         }
                     },
                     "required": true
@@ -288,16 +252,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Challenge"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonschema"
                                 }
                             }
                         }
@@ -413,16 +367,6 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/Challenge"
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Challenge.jsonschema"
-                                }
                             }
                         },
                         "links": {}
@@ -523,7 +467,7 @@
                 "deprecated": false
             }
         },
-        "/api/login": {
+        "api_login": {
             "post": {
                 "operationId": "login_check_post",
                 "tags": [
@@ -690,22 +634,6 @@
                                         "$ref": "#/components/schemas/Mission"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Mission.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Mission.jsonschema"
-                                    }
-                                }
                             }
                         }
                     }
@@ -748,16 +676,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Mission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonschema"
                                 }
                             }
                         },
@@ -821,16 +739,6 @@
                             "schema": {
                                 "$ref": "#/components/schemas/Mission"
                             }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Mission.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Mission.jsonschema"
-                            }
                         }
                     },
                     "required": true
@@ -856,16 +764,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Mission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonschema"
                                 }
                             }
                         }
@@ -980,16 +878,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Mission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Mission.jsonschema"
                                 }
                             }
                         },
@@ -1201,22 +1089,6 @@
                                         "$ref": "#/components/schemas/MissionSubmission"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/MissionSubmission.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/MissionSubmission.jsonschema"
-                                    }
-                                }
                             }
                         }
                     }
@@ -1259,16 +1131,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/MissionSubmission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonschema"
                                 }
                             }
                         },
@@ -1332,16 +1194,6 @@
                             "schema": {
                                 "$ref": "#/components/schemas/MissionSubmission"
                             }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/MissionSubmission.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/MissionSubmission.jsonschema"
-                            }
                         }
                     },
                     "required": true
@@ -1367,16 +1219,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/MissionSubmission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonschema"
                                 }
                             }
                         }
@@ -1491,16 +1333,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/MissionSubmission"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MissionSubmission.jsonschema"
                                 }
                             }
                         },
@@ -1712,22 +1544,6 @@
                                         "$ref": "#/components/schemas/Ranking"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Ranking.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Ranking.jsonschema"
-                                    }
-                                }
                             }
                         }
                     }
@@ -1770,16 +1586,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Ranking"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonschema"
                                 }
                             }
                         },
@@ -1843,16 +1649,6 @@
                             "schema": {
                                 "$ref": "#/components/schemas/Ranking"
                             }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Ranking.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Ranking.jsonschema"
-                            }
                         }
                     },
                     "required": true
@@ -1878,16 +1674,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Ranking"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonschema"
                                 }
                             }
                         }
@@ -2002,16 +1788,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Ranking"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Ranking.jsonschema"
                                 }
                             }
                         },
@@ -2223,22 +1999,6 @@
                                         "$ref": "#/components/schemas/School"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/School.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/School.jsonschema"
-                                    }
-                                }
                             }
                         }
                     }
@@ -2281,16 +2041,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/School"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonschema"
                                 }
                             }
                         },
@@ -2354,16 +2104,6 @@
                             "schema": {
                                 "$ref": "#/components/schemas/School"
                             }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/School.jsonopenapi"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/School.jsonschema"
-                            }
                         }
                     },
                     "required": true
@@ -2389,16 +2129,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/School"
-                                }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonschema"
                                 }
                             }
                         }
@@ -2514,16 +2244,6 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/School"
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonschema"
-                                }
                             }
                         },
                         "links": {}
@@ -2631,20 +2351,18 @@
                     "User"
                 ],
                 "responses": {
-                    "204": {
+                    "201": {
                         "description": "User resource created",
                         "content": {
                             "application/ld+json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/User.jsonld"
+                                }
                             },
                             "application/json": {
-                                "schema": {}
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {}
-                            },
-                            "application/schema+json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
                             }
                         },
                         "links": {}
@@ -2721,22 +2439,12 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User.UserInput.jsonld-user.write"
+                                "$ref": "#/components/schemas/User.jsonld"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User.UserInput-user.write"
-                            }
-                        },
-                        "application/vnd.openapi+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.UserInput.jsonopenapi-user.write"
-                            }
-                        },
-                        "application/schema+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.UserInput.jsonschema-user.write"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     },
@@ -2855,45 +2563,8 @@
                                         "$ref": "#/components/schemas/User"
                                     }
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/User.jsonopenapi"
-                                    }
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/User.jsonschema"
-                                    }
-                                }
                             }
                         }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error.jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        },
-                        "links": {}
                     }
                 },
                 "summary": "Retrieves the collection of User resources.",
@@ -2916,6 +2587,92 @@
                     }
                 ],
                 "deprecated": false
+            },
+            "post": {
+                "operationId": "api_users_post",
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User resource created",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User.jsonld"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        },
+                        "links": {}
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error.jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "links": {}
+                    },
+                    "422": {
+                        "description": "An error occurred",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConstraintViolation.jsonld-jsonld"
+                                }
+                            },
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConstraintViolation-json"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConstraintViolation-json"
+                                }
+                            }
+                        },
+                        "links": {}
+                    }
+                },
+                "summary": "Creates a User resource.",
+                "description": "Creates a User resource.",
+                "parameters": [],
+                "requestBody": {
+                    "description": "The new User resource",
+                    "content": {
+                        "application/ld+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User.jsonld"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "deprecated": false
             }
         },
         "/api/users/{id}": {
@@ -2937,39 +2694,8 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/User"
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonschema"
-                                }
                             }
                         }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error.jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        },
-                        "links": {}
                     },
                     "404": {
                         "description": "Not found",
@@ -3021,27 +2747,6 @@
                 "responses": {
                     "204": {
                         "description": "User resource deleted"
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error.jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        },
-                        "links": {}
                     },
                     "404": {
                         "description": "Not found",
@@ -3103,16 +2808,6 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/User"
                                 }
-                            },
-                            "application/vnd.openapi+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonopenapi"
-                                }
-                            },
-                            "application/schema+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonschema"
-                                }
                             }
                         },
                         "links": {}
@@ -3154,27 +2849,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ConstraintViolation-json"
-                                }
-                            }
-                        },
-                        "links": {}
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error.jsonld"
-                                }
-                            },
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
                                 }
                             }
                         },
@@ -3264,14 +2938,6 @@
                             "format": "iri-reference",
                             "example": "https://example.com/"
                         }
-                    },
-                    "missionEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "sponsorshipEnd": {
-                        "type": "string",
-                        "format": "date-time"
                     }
                 }
             },
@@ -3337,90 +3003,6 @@
                             "format": "iri-reference",
                             "example": "https://example.com/"
                         }
-                    },
-                    "missionEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "sponsorshipEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Challenge.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "academicYear": {
-                        "type": "string"
-                    },
-                    "missions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "rankings": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "missionEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "sponsorshipEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Challenge.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "academicYear": {
-                        "type": "string"
-                    },
-                    "missions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "rankings": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "missionEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "sponsorshipEnd": {
-                        "type": "string",
-                        "format": "date-time"
                     }
                 }
             },
@@ -3834,118 +3416,6 @@
                     }
                 }
             },
-            "Mission.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "challenge": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "admin": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "repeatable": {
-                        "type": "boolean"
-                    },
-                    "maxRepetitions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ]
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "created",
-                            "active",
-                            "paused",
-                            "completed"
-                        ]
-                    },
-                    "missionSubmissions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    }
-                }
-            },
-            "Mission.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "challenge": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "admin": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "repeatable": {
-                        "type": "boolean"
-                    },
-                    "maxRepetitions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ]
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "created",
-                            "active",
-                            "paused",
-                            "completed"
-                        ]
-                    },
-                    "missionSubmissions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    }
-                }
-            },
             "MissionSubmission": {
                 "type": "object",
                 "description": "",
@@ -4101,126 +3571,6 @@
                     }
                 }
             },
-            "MissionSubmission.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "ambassador": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "mission": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "proofPath": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "submitted",
-                            "approved",
-                            "rejected"
-                        ]
-                    },
-                    "rejectionReason": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "admin": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "submissionDate": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "validationDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    }
-                }
-            },
-            "MissionSubmission.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "ambassador": {
-                        "type": "string",
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "mission": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "proofPath": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "submitted",
-                            "approved",
-                            "rejected"
-                        ]
-                    },
-                    "rejectionReason": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "admin": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "submissionDate": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "validationDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    }
-                }
-            },
             "Ranking": {
                 "type": "object",
                 "description": "",
@@ -4310,204 +3660,6 @@
                     }
                 }
             },
-            "Ranking.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "ambassador": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "challenge": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    }
-                }
-            },
-            "Ranking.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "ambassador": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "challenge": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    }
-                }
-            },
-            "Rankings.RankingOutput": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "rank": {
-                        "type": "integer"
-                    },
-                    "ambassadorFullName": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "schoolYear": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "rewards": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "Rankings.RankingOutput.jsonld": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "rank": {
-                        "type": "integer"
-                    },
-                    "ambassadorFullName": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "schoolYear": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "rewards": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "Rankings.RankingOutput.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "rank": {
-                        "type": "integer"
-                    },
-                    "ambassadorFullName": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "schoolYear": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "rewards": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "Rankings.RankingOutput.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "rank": {
-                        "type": "integer"
-                    },
-                    "ambassadorFullName": {
-                        "type": "string"
-                    },
-                    "points": {
-                        "type": "integer"
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "schoolYear": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "rewards": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
             "School": {
                 "type": "object",
                 "description": "",
@@ -4571,34 +3723,6 @@
                     }
                 }
             },
-            "School.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                }
-            },
-            "School.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                }
-            },
             "User": {
                 "type": "object",
                 "description": "",
@@ -4627,6 +3751,12 @@
                     },
                     "lastName": {
                         "type": "string"
+                    },
+                    "shcoolName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "phoneNumber": {
                         "type": [
@@ -4658,151 +3788,12 @@
                             "example": "https://example.com/"
                         }
                     },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
-                    },
-                    "schoolName": {
-                        "readOnly": true,
-                        "type": [
-                            "string",
-                            "null"
-                        ]
                     }
                 }
-            },
-            "User.UserInput-user.write": {
-                "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
-                "deprecated": false,
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "phoneNumber": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "school": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "school"
-                ]
-            },
-            "User.UserInput.jsonld-user.write": {
-                "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
-                "deprecated": false,
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "phoneNumber": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "school": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "school"
-                ]
-            },
-            "User.UserInput.jsonopenapi-user.write": {
-                "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
-                "deprecated": false,
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "phoneNumber": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "school": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "school"
-                ]
-            },
-            "User.UserInput.jsonschema-user.write": {
-                "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
-                "deprecated": false,
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "phoneNumber": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "school": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "school"
-                ]
             },
             "User.jsonld": {
                 "type": "object",
@@ -4868,86 +3859,11 @@
                     "lastName": {
                         "type": "string"
                     },
-                    "phoneNumber": {
+                    "shcoolName": {
                         "type": [
                             "string",
                             "null"
                         ]
-                    },
-                    "missions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "missionSubmissions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "rankings": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "userIdentifier": {
-                        "readOnly": true,
-                        "description": "A visual identifier that represents this user.",
-                        "type": "string"
-                    },
-                    "schoolName": {
-                        "readOnly": true,
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    }
-                }
-            },
-            "User.jsonopenapi": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "description": "The user roles",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "password": {
-                        "description": "The hashed password",
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
                     },
                     "phoneNumber": {
                         "type": [
@@ -4979,106 +3895,10 @@
                             "example": "https://example.com/"
                         }
                     },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
                     "userIdentifier": {
                         "readOnly": true,
                         "description": "A visual identifier that represents this user.",
                         "type": "string"
-                    },
-                    "schoolName": {
-                        "readOnly": true,
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    }
-                }
-            },
-            "User.jsonschema": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "description": "The user roles",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "password": {
-                        "description": "The hashed password",
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "phoneNumber": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "missions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "missionSubmissions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "rankings": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference",
-                            "example": "https://example.com/"
-                        }
-                    },
-                    "school": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "iri-reference",
-                        "example": "https://example.com/"
-                    },
-                    "userIdentifier": {
-                        "readOnly": true,
-                        "description": "A visual identifier that represents this user.",
-                        "type": "string"
-                    },
-                    "schoolName": {
-                        "readOnly": true,
-                        "type": [
-                            "string",
-                            "null"
-                        ]
                     }
                 }
             }
@@ -5098,9 +3918,6 @@
     },
     "security": [],
     "tags": [
-        {
-            "name": "Rankings"
-        },
         {
             "name": "Challenge"
         },

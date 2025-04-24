@@ -71,6 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $schoolName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
@@ -202,6 +204,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getSchoolName(): ?string
+    {
+        return $this->schoolName;
+    }
+
+    public function setSchoolName(?string $shcoolName): static
+    {
+        $this->schoolName = $shcoolName;
+
+        return $this;
+    }
 
     public function getPhoneNumber(): ?string
     {

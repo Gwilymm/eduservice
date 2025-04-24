@@ -1,12 +1,6 @@
 api_platform:
-  title: Eduservice API
-  description: API for Eduservice Ambassador Management
+  title: Eduservice Api
   version: 1.0.0
-  enable_swagger: true
-  enable_swagger_ui: true
-  enable_re_doc: true
-  swagger:
-    versions: [3]
   defaults:
     stateless: true
     cache_headers:
@@ -14,5 +8,3 @@ api_platform:
   formats:
     jsonld: ["application/ld+json"]
     json: ["application/json"]
-    jsonopenapi: ["application/vnd.openapi+json"]
-    jsonschema: ["application/schema+json"]

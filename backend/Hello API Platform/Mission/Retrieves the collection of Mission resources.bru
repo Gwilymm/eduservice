@@ -1,0 +1,15 @@
+meta {
+  name: Retrieves the collection of Mission resources.
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/missions
+  body: none
+  auth: none
+}
+
+params:query {
+  ~page: 
+}
