@@ -37,7 +37,16 @@ class UserProcessor implements ProcessorInterface
             throw new \InvalidArgumentException('School ID is invalid');
         }
 
-        $user->setSchool($school);
+		if ($data->getSchoolId()) {
+			$school = $this->entityManager->getRepository(\App\Entity\School::class)->find($data->getSchoolId());
+			if (!$school) {
+				throw new BadRequestHttpException("Invalid school ID: " . $data->getSchoolId());
+			}
+			$data->setSchool($school);
+		}
+
+		// Hacher le mot de passe avant de sauvegarders
+		$data->setPassword($this->passwordHasher->hashPassword($data, $data->getPassword()));
 
         $this->em->persist($user);
         $this->em->flush();
