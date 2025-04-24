@@ -72,9 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $schoolName = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
 
     /**
@@ -96,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $rankings;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     private ?School $school = null;
 
     public function __construct()
@@ -200,18 +198,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getSchoolName(): ?string
-    {
-        return $this->schoolName;
-    }
-
-    public function setSchoolName(?string $shcoolName): static
-    {
-        $this->schoolName = $shcoolName;
 
         return $this;
     }
@@ -328,11 +314,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->school = $school;
 
         return $this;
-    }
-
-    #[Groups(['user:read'])]
-    public function getSchoolName(): ?string
-    {
-        return $this->school?->getName();
     }
 }
