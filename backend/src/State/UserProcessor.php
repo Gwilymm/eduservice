@@ -37,7 +37,15 @@ class UserProcessor implements ProcessorInterface
 			throw new BadRequestHttpException((string) $errors);
 		}
 
-		// Hacher le mot de passe avant de sauvegarder
+		if ($data->getSchoolId()) {
+			$school = $this->entityManager->getRepository(\App\Entity\School::class)->find($data->getSchoolId());
+			if (!$school) {
+				throw new BadRequestHttpException("Invalid school ID: " . $data->getSchoolId());
+			}
+			$data->setSchool($school);
+		}
+
+		// Hacher le mot de passe avant de sauvegarders
 		$data->setPassword($this->passwordHasher->hashPassword($data, $data->getPassword()));
 
 		$this->entityManager->persist($data);
