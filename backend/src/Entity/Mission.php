@@ -39,6 +39,9 @@ class Mission
     #[ORM\Column]
     private ?bool $repeatable = null;
 
+    #[ORM\Column]
+    private ?bool $requiresProof = true;
+
     #[ORM\Column(nullable: true)]
     private ?int $maxRepetitions = null;
 
@@ -129,6 +132,18 @@ class Mission
     public function setRepeatable(bool $repeatable): static
     {
         $this->repeatable = $repeatable;
+
+        return $this;
+    }
+
+    public function isRequiresProof(): ?bool
+    {
+        return $this->requiresProof;
+    }
+
+    public function setRequiresProof(bool $requiresProof): static
+    {
+        $this->requiresProof = $requiresProof;
 
         return $this;
     }

@@ -1,0 +1,28 @@
+meta {
+  name: Updates the Ranking resource.
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/api/rankings/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+headers {
+  Authorization: {{Bearer}}
+}
+script:post-response {
+  if (res.status === 200) {
+  }
+  if (res.status === 400) {
+  }
+  if (res.status === 404) {
+  }
+  if (res.status === 422) {
+  }
+}

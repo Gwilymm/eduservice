@@ -1,0 +1,22 @@
+meta {
+  name: Removes the Mission resource.
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/missions/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+headers {
+  Authorization: {{Bearer}}
+}
+script:post-response {
+  if (res.status === 404) {
+  }
+}

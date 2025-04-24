@@ -24,7 +24,7 @@ class MissionSubmission
     #[ORM\ManyToOne(inversedBy: 'missionSubmissions')]
     private ?Mission $mission = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $proofPath = null;
 
     #[ORM\Column(enumType: MissionSubmissionStatus::class)]
@@ -76,7 +76,7 @@ class MissionSubmission
         return $this->proofPath;
     }
 
-    public function setProofPath(string $proofPath): static
+    public function setProofPath(?string $proofPath): static
     {
         $this->proofPath = $proofPath;
 

@@ -25,6 +25,23 @@ class ChallengeFixtures extends Fixture
 			$challenge = new Challenge();
 			$challenge->setAcademicYear($academicYear);
 
+			// Définition des dates de fin pour les missions et le parrainage
+			// Pour 2023-2024 (année précédente), dates dans le passé
+			if ($reference === self::CHALLENGE_2023_2024) {
+				$challenge->setMissionEnd(new \DateTime('2024-08-31'));
+				$challenge->setSponsorshipEnd(new \DateTime('2024-10-31'));
+			}
+			// Pour 2024-2025 (année en cours), dates dans le futur proche
+			else if ($reference === self::CHALLENGE_2024_2025) {
+				$challenge->setMissionEnd(new \DateTime('2025-08-31'));
+				$challenge->setSponsorshipEnd(new \DateTime('2025-10-31'));
+			}
+			// Pour 2025-2026 (prochaine année), dates plus éloignées dans le futur
+			else {
+				$challenge->setMissionEnd(new \DateTime('2026-08-31'));
+				$challenge->setSponsorshipEnd(new \DateTime('2026-10-31'));
+			}
+
 			$manager->persist($challenge);
 
 			// Enregistrer la référence pour pouvoir la récupérer dans d'autres fixtures

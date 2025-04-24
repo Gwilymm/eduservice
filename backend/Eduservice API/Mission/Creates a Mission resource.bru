@@ -1,0 +1,22 @@
+meta {
+  name: Creates a Mission resource.
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/missions
+  body: none
+  auth: none
+}
+headers {
+  Authorization: {{Bearer}}
+}
+script:post-response {
+  if (res.status === 201) {
+  }
+  if (res.status === 400) {
+  }
+  if (res.status === 422) {
+  }
+}

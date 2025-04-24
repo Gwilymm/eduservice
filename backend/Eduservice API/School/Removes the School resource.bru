@@ -1,0 +1,23 @@
+meta {
+  name: Removes the School resource.
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/schools/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+headers {
+  Authorization: {{Bearer}}
+}
+
+script:post-response {
+  if (res.status === 404) {
+  }
+}

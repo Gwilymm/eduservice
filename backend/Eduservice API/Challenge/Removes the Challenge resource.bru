@@ -1,0 +1,22 @@
+meta {
+  name: Removes the Challenge resource.
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/challenges/:id
+  body: none
+  auth: none
+}
+headers {
+  Authorization: {{Bearer}}
+}
+params:path {
+  id: 
+}
+
+script:post-response {
+  if (res.status === 404) {
+  }
+}

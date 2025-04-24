@@ -2,9 +2,11 @@
 
 namespace App\State;
 
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
 use App\Dto\Input\UserInput;
 use App\Entity\User;
-use App\Repository\SchoolRepository;
+use App\Entity\School;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use ApiPlatform\Metadata\Operation;
@@ -18,39 +20,67 @@ class UserProcessor implements ProcessorInterface
         private SchoolRepository $schoolRepo
     ) {}
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): User
+
+
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
-        assert($data instanceof UserInput);
+        // Handle UserInput DTO
+        if ($data instanceof UserInput) {
+            $user = new User();
+            $user->setEmail($data->email);
+            $user->setPassword($data->password);
+            $user->setFirstName($data->firstName);
+            $user->setLastName($data->lastName);
+            $user->setPhoneNumber($data->phoneNumber);
 
-        $user = new User();
-        $user->setEmail($data->email);
-        $user->setFirstName($data->firstName);
-        $user->setLastName($data->lastName);
-        $user->setPhoneNumber($data->phoneNumber);
-        $user->setRoles(['ROLE_AMBASSADOR']);
-        $user->setPassword(
-            $this->passwordHasher->hashPassword($user, $data->password)
-        );
-
-        $school = $this->schoolRepo->find($data->school);
-        if (!$school) {
-            throw new \InvalidArgumentException('School ID is invalid');
-        }
-
-        if ($data->getSchoolId()) {
-            $school = $this->entityManager->getRepository(\App\Entity\School::class)->find($data->getSchoolId());
+            // Handle school relationship
+            $school = $this->entityManager->getRepository(School::class)->find($data->school);
             if (!$school) {
-                throw new BadRequestHttpException("Invalid school ID: " . $data->getSchoolId());
+                throw new BadRequestHttpException("Invalid school ID: " . $data->school);
             }
-            $data->setSchool($school);
+            $user->setSchool($school);
+
+            // Set default roles if needed
+            $user->setRoles(['ROLE_USER']);
+
+            // Validate the created user
+            $errors = $this->validator->validate($user);
+            if (count($errors) > 0) {
+                throw new BadRequestHttpException((string) $errors);
+            }
+
+            // Hash the password
+            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return $user;
         }
+        // Handle User entity
+        else if ($data instanceof User) {
+            $errors = $this->validator->validate($data);
+            if (count($errors) > 0) {
+                throw new BadRequestHttpException((string) $errors);
+            }
 
-        // Hacher le mot de passe avant de sauvegarders
-        $data->setPassword($this->passwordHasher->hashPassword($data, $data->getPassword()));
+            if ($data->getSchoolId()) {
+                $school = $this->entityManager->getRepository(School::class)->find($data->getSchoolId());
+                if (!$school) {
+                    throw new BadRequestHttpException("Invalid school ID: " . $data->getSchoolId());
+                }
+                $data->setSchool($school);
+            }
 
-        $this->em->persist($user);
-        $this->em->flush();
+            // Hash the password
+            $data->setPassword($this->passwordHasher->hashPassword($data, $data->getPassword()));
 
-        return $user;
+            $this->entityManager->persist($data);
+            $this->entityManager->flush();
+
+            return $data;
+        } else {
+            throw new BadRequestHttpException("Invalid user data: Expected User or UserInput");
+        }
     }
 }

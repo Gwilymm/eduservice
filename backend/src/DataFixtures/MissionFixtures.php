@@ -121,6 +121,9 @@ class MissionFixtures extends Fixture implements DependentFixtureInterface
 
 							$mission->setStatus($faker->randomElement($statusArray));
 
+							// Définition aléatoire si la mission nécessite un justificatif (70% oui, 30% non)
+							$mission->setRequiresProof($faker->boolean(70));
+
 							$manager->persist($mission);
 						}
 					}
