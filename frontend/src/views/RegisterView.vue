@@ -9,10 +9,10 @@
               <v-card>
                 <v-card-title>Informations personnelles</v-card-title>
                 <v-card-text>
-                  <v-text-field v-model="form.firstName" label="Prénom" :rules="[rules.required]"
+                  <v-text-field v-model="localForm.firstName" label="Prénom" :rules="[rules.required]"
                     required></v-text-field>
-
-                  <v-text-field v-model="form.lastName" label="Nom" :rules="[rules.required]" required></v-text-field>
+                  <v-text-field v-model="localForm.lastName" label="Nom" :rules="[rules.required]"
+                    required></v-text-field>
                 </v-card-text>
               </v-card>
             </template>
@@ -22,10 +22,10 @@
               <v-card>
                 <v-card-title>École & Classe</v-card-title>
                 <v-card-text>
-                  <v-select v-model="form.school" label="École" :items="schools" :rules="[rules.required]"
+                  <v-select v-model="localForm.school" label="École" :items="schools" :rules="[rules.required]"
                     required></v-select>
-
-                  <v-text-field v-model="form.class" label="Classe" :rules="[rules.required]" required></v-text-field>
+                  <v-text-field v-model="localForm.class" label="Classe" :rules="[rules.required]"
+                    required></v-text-field>
                 </v-card-text>
               </v-card>
             </template>
@@ -35,14 +35,12 @@
               <v-card>
                 <v-card-title>Coordonnées</v-card-title>
                 <v-card-text>
-                  <v-text-field v-model="form.email" label="Mail personnel" :rules="[rules.required, rules.email]"
+                  <v-text-field v-model="localForm.email" label="Mail personnel" :rules="[rules.required, rules.email]"
                     required></v-text-field>
-
-                  <v-text-field v-model="form.schoolEmail" label="Mail école" :rules="[rules.required, rules.email]"
-                    required></v-text-field>
-
-                  <v-text-field v-model="form.phone" label="Téléphone portable" :rules="[rules.required, rules.phone]"
-                    required></v-text-field>
+                  <v-text-field v-model="localForm.schoolEmail" label="Mail école"
+                    :rules="[rules.required, rules.email]" required></v-text-field>
+                  <v-text-field v-model="localForm.phone" label="Téléphone portable"
+                    :rules="[rules.required, rules.phone]" required></v-text-field>
                 </v-card-text>
               </v-card>
             </template>
@@ -52,8 +50,8 @@
               <v-card>
                 <v-card-title>Missions souhaitées</v-card-title>
                 <v-card-text>
-                  <div v-for="mission in form.selectedMissions" :key="mission.id">
-                    <v-checkbox v-model="mission.isCompleted" :label="mission.title" color="red"
+                  <div v-for="mission in localForm.selectedMissions" :key="mission.id">
+                    <v-checkbox v-model="mission.isCompleted" :label="mission.title" color="primary"
                       @change="updateSelectedMissions"></v-checkbox>
                   </div>
                 </v-card-text>
@@ -81,31 +79,34 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRegisterStore } from '@/stores/registerStore.js';
+import { useRouter } from 'vue-router';
 
-const step = ref(1);
+const router = useRouter();
+const formStore = useRegisterStore();
+const step = ref(formStore.step);
 const isValid = ref(false);
 const formRef = ref(null);
 
-const form = ref({
-  firstName: '',
-  lastName: '',
-  school: '',
-  class: '',
-  email: '',
-  schoolEmail: '',
-  phone: '',
-  selectedMissions: [
-    { id: 1, title: 'Communiquer sur les RS', isCompleted: false },
-    { id: 2, title: 'Poster des avis', isCompleted: false },
-    { id: 3, title: 'Participer à des TikTok', isCompleted: false },
-    { id: 4, title: 'Livrer votre témoignage', isCompleted: false },
-    { id: 5, title: 'Participer à un shooting photos', isCompleted: false },
-    { id: 6, title: 'Intervenir dans votre ancien établissement', isCompleted: false },
-    { id: 7, title: 'Participer à des événements', isCompleted: false },
-    { id: 8, title: 'Parrainer des futurs étudiants', isCompleted: false }
-  ],
+const localForm = ref({
+  firstName: formStore.form.firstName,
+  lastName: formStore.form.lastName,
+  school: formStore.form.school,
+  class: formStore.form.class,
+  email: formStore.form.email,
+  schoolEmail: formStore.form.schoolEmail,
+  phone: formStore.form.phone,
+  selectedMissions: formStore.form.selectedMissions.map(mission => ({ ...mission }))
 });
+
+watch(step, (newStep) => {
+  formStore.updateStep(newStep);
+});
+
+watch(localForm, (newValue) => {
+  formStore.saveForm(newValue);
+}, { deep: true });
 
 const schools = [
   'AFTEC',
@@ -117,63 +118,34 @@ const schools = [
   "L'École internationale TUNON"
 ];
 
-// const missionsData = [
-//   { id: 1, title: 'Communiquer sur les RS', isCompleted: false },
-//   { id: 2, title: 'Poster des avis', isCompleted: false },
-//   { id: 3, title: 'Participer à des TikTok', isCompleted: false },
-//   { id: 4, title: 'Livrer votre témoignage', isCompleted: false },
-//   { id: 5, title: 'Participer à un shooting photos', isCompleted: false },
-//   { id: 6, title: 'Intervenir dans votre ancien établissement', isCompleted: false },
-//   { id: 7, title: 'Participer à des événements', isCompleted: false },
-//   { id: 8, title: 'Parrainer des futurs étudiants', isCompleted: false }
-// ];
-
-
 const rules = {
   required: (v) => !!v || 'Ce champ est requis',
   email: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) || 'Adresse e-mail invalide',
   phone: (v) => /^[0-9]{10}$/.test(v) || 'Le numéro doit contenir 10 chiffres',
 };
 
-
 function nextStep() {
-  formRef.value.validate().then((valid) => {
-    if (valid) {
-      step.value++;
-    }
-  });
-}
-
-
-function prevStep() {
-  if (step.value > 1) {
-    step.value--;
+  if (step.value < 4) {
+    step.value += 1;
   }
 }
 
+function prevStep() {
+  if (step.value > 1) {
+    step.value -= 1;
+  }
+}
 
 function updateSelectedMissions() {
-  form.value.selectedMissions = form.value.selectedMissions.map(mission => ({
-    ...mission,
-    isCompleted: mission.isCompleted,
-  }));
 }
-
 
 function submitForm() {
-  formRef.value.validate().then((valid) => {
-    if (valid) {
-      const formData = {
-        ...form.value,
-        missions: missionsData
-          .filter(mission => mission.isCompleted)
-          .map(mission => mission.title)
-      };
-
-      console.log('Formulaire soumis avec :', formData);
-      alert('Formulaire validé avec succès !');
-    }
-  });
+  if (!formRef.value.validate()) {
+    return;
+  }
+  console.log('Formulaire soumis avec :', localForm.value);
+  formStore.resetForm();
+  router.push('/');
 }
-</script>
 
+</script>
