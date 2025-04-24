@@ -6,8 +6,20 @@ meta {
 
 post {
   url: {{baseUrl}}/api/register
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "lucas.martin@gmail.com",
+    "password": "SuperSecure123!",
+    "firstName": "Lucas",
+    "lastName": "Martin",
+    "school": 2,
+    "phoneNumber": "0708091011"
+  }
+  
 }
 
 script:post-response {

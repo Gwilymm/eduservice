@@ -13,7 +13,9 @@ patch {
 params:path {
   id: 
 }
-
+headers {
+  Authorization: {{Bearer}}
+}
 script:post-response {
   if (res.status === 200) {
   }

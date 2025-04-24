@@ -9,7 +9,9 @@ post {
   body: none
   auth: none
 }
-
+headers {
+  Authorization: {{Bearer}}
+}
 script:post-response {
   if (res.status === 201) {
   }

@@ -14,6 +14,10 @@ params:query {
   ~page: 
 }
 
+headers {
+  Authorization: {{Bearer}}
+}
+
 script:post-response {
   if (res.status === 403) {
   }
