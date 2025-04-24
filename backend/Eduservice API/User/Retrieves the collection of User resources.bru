@@ -13,3 +13,8 @@ get {
 params:query {
   ~page: 
 }
+
+script:post-response {
+  if (res.status === 403) {
+  }
+}

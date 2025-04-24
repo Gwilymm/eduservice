@@ -6,24 +6,12 @@ meta {
 
 post {
   url: {{baseUrl}}/api/register
-  body: json
+  body: none
   auth: none
 }
 
-body:json {
-  {
-    "email": "lucas.martin@gmail.com",
-    "password": "SuperSecure123!",
-    "firstName": "Lucas",
-    "lastName": "Martin",
-    "schoolId": 1,
-    "phoneNumber": "0708091011"
-  }
-  
-}
-
 script:post-response {
-  if (res.status === 201) {
+  if (res.status === 204) {
   }
   if (res.status === 400) {
   }

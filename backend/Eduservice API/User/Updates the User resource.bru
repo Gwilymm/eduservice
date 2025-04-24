@@ -1,7 +1,7 @@
 meta {
   name: Updates the User resource.
   type: http
-  seq: 6
+  seq: 5
 }
 
 patch {
@@ -18,6 +18,8 @@ script:post-response {
   if (res.status === 200) {
   }
   if (res.status === 400) {
+  }
+  if (res.status === 403) {
   }
   if (res.status === 404) {
   }
