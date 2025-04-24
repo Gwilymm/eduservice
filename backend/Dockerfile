@@ -1,6 +1,9 @@
 # Dockerfile pour FrankenPHP avec Symfony 7
 FROM dunglas/frankenphp:latest
 
+
+ENV SERVER_NAME=:80
+
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 

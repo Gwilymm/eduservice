@@ -21,7 +21,7 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost',
         changeOrigin: true,
-        secure: false,
+        secure: false, // Désactive la vérification du certificat SSL
         rewrite: (path) => path.replace(/^\/api/, '/api'),
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
