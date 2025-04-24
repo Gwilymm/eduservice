@@ -9,18 +9,24 @@ use App\Entity\User;
 use App\Entity\School;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use ApiPlatform\Metadata\Operation;
-use ApiPlatform\State\ProcessorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserProcessor implements ProcessorInterface
 {
+    private EntityManagerInterface $entityManager;
+    private UserPasswordHasherInterface $passwordHasher;
+    private ValidatorInterface $validator;
+
     public function __construct(
-        private EntityManagerInterface $em,
-        private UserPasswordHasherInterface $passwordHasher,
-        private SchoolRepository $schoolRepo
-    ) {}
-
-
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher,
+        ValidatorInterface $validator
+    ) {
+        $this->entityManager = $entityManager;
+        $this->passwordHasher = $passwordHasher;
+        $this->validator = $validator;
+    }
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
