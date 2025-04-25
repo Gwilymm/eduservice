@@ -7,7 +7,7 @@ import axios from 'axios';
  * - withCredentials: false (pas de cookies/auth pour l'instant)
  */
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/ld+json',
@@ -25,11 +25,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Intercepteur pour gérer les erreurs
+// Intercepteur pour gérer les erreurs 401 (non autorisé)
+// Redirige vers la page de login si l'utilisateur n'est pas authentifié
+// et que la page actuelle n'est pas la page de login
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
+  response => response,
+  error => {
+    if (error.response?.status === 401 && window.location.pathname !== '/login') {
+      localStorage.removeItem('token');
       window.location.href = '/login';
     }
     return Promise.reject(error);
