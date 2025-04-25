@@ -1,75 +1,84 @@
 <template>
-  <v-container class="d-flex flex-column align-center justify-center fill-height">
-    <h1 class="text-center text-primary mb-16 text-h3">CHALLENGE AMBASSADEUR</h1>
-    <v-row justify="center" align="center" class="mt-8 gap-12">
+  <v-container>
+    <div class="text-center my-8 pt-8">
+      <h1 class="text-primary text-h3">CHALLENGE AMBASSADEUR</h1>
+    </div>
+
+    <v-row justify="center" class="mt-4">
       <!-- Section Connexion -->
-      <v-col cols="12" md="6"
-        class="d-flex flex-column align-center pa-8 rounded-lg bg-grey-lighten-3 elevation-2 mr-8">
-        <h3 class="text-center mb-8 text-h5">Se connecter</h3>
-        
-        <!-- Ajout d'une alerte pour les erreurs -->
-        <v-alert
-          v-if="loginError"
-          type="error"
-          variant="tonal"
-          closable
-          class="mb-4 w-100"
-          @click:close="loginError = ''"
-        >
-          {{ loginError }}
-        </v-alert>
-        
-        <v-form ref="form" v-model="isFormValid" class="w-100" @submit.prevent="login">
-          <v-text-field v-model="username" label="Identifiant" outlined class="mb-6 text-field-large"
-            :rules="usernameRules" hide-details="auto" density="comfortable" variant="outlined" bg-color="white"></v-text-field>
+      <v-col cols="12" md="5" lg="5" xl="4" class="d-flex">
+        <v-card class="d-flex flex-column align-center pa-8 elevation-2 w-100">
+          <h3 class="text-center mb-8 text-h5">Se connecter</h3>
 
-          <v-text-field v-model="password" label="Mot de passe" type="password" outlined class="mb-6 text-field-large"
-            :rules="passwordRules" hide-details="auto" density="comfortable" variant="outlined"
-            bg-color="white"></v-text-field>
+          <v-alert v-if="loginError" type="error" variant="tonal" closable class="mb-4 w-100"
+            @click:close="loginError = ''">
+            {{ loginError }}
+          </v-alert>
 
-          <v-btn 
-            color="primary" 
-            class="mt-6 py-4" 
-            block 
-            type="submit" 
-            size="x-large" 
-            height="56"
-            :loading="loading"
-          >
-            OK
+          <v-form ref="form" v-model="isFormValid" class="w-100" @submit.prevent="login">
+            <div class="relative mb-6">
+              <label for="email" class="absolute left-4 top-2 text-gray-500 transition-all duration-200 pointer-events-none 
+             peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 
+             peer-focus:opacity-0 peer-focus:top-2 peer-focus:text-gray-500">
+                Email
+              </label>
+              <v-text-field id="email" v-model="email" outlined class="peer text-field-large" :rules="emailRules"
+                hide-details="auto" density="comfortable" variant="outlined" bg-color="white"
+                type="email"></v-text-field>
+            </div>
+
+            <div class="relative mb-6">
+              <label for="password" class="absolute left-4 top-2 text-gray-500 transition-all duration-200 pointer-events-none 
+             peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 
+             peer-focus:opacity-0 peer-focus:top-2 peer-focus:text-gray-500">
+                Mot de passe
+              </label>
+              <v-text-field id="password" v-model="password" outlined class="peer text-field-large"
+                :rules="passwordRules" hide-details="auto" density="comfortable" variant="outlined" bg-color="white"
+                type="password"></v-text-field>
+            </div>
+
+            <v-btn color="primary" class="mt-6 py-4" block type="submit" size="x-large" height="56" :loading="loading"
+              :disabled="loading">
+              OK
+            </v-btn>
+          </v-form>
+
+          <v-btn text class="mt-6 text-decoration-underline text-body-1" @click="navigateToRegister">
+            Se créer un compte
           </v-btn>
-        </v-form>
-
-        <v-btn text class="mt-6 text-decoration-underline text-body-1" @click="navigateToRegister">Se créer un
-          compte</v-btn>
+        </v-card>
       </v-col>
 
+      <!-- Espacement entre les cards -->
+      <v-col cols="1" md="1"></v-col>
+
       <!-- Section Présentation -->
-      <v-col cols="12" md="5" class="d-flex flex-column align-center pa-8 rounded-lg bg-grey-lighten-3 elevation-2">
-        <h3 class="text-center mb-8 text-h5">Consulter la présentation du Challenge Ambassadeur</h3>
-        <v-btn text class="text-decoration-underline text-body-1" size="large">Challenge Ambassadeur</v-btn>
+      <v-col cols="12" md="5" lg="5" xl="4" class="d-flex">
+        <v-card class="d-flex flex-column align-center justify-center pa-8 elevation-2 w-100">
+          <h3 class="text-center mb-8 text-h5">Consulter la présentation du Challenge Ambassadeur</h3>
+          <v-btn text class="text-decoration-underline text-body-1" size="large">Challenge Ambassadeur</v-btn>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import loginService from '@/api/loginService';
 
 const router = useRouter();
 const form = ref(null);
 const isFormValid = ref(false);
-const username = ref('');
+const email = ref('');
 const password = ref('');
 const loginError = ref('');
 const loading = ref(false);
 
-const usernameRules = [
-  v => !!v || 'L\'identifiant est requis',
-  v => (v && v.length >= 3) || 'L\'identifiant doit contenir au moins 3 caractères',
-  v => /^[a-zA-Z0-9._-]+$/.test(v) || 'L\'identifiant ne doit contenir que des caractères alphanumériques, points, tirets ou underscores'
+const emailRules = [
+  v => !!v || 'L\'email est requis',
+  v => /.+@.+\..+/.test(v) || 'L\'email doit être valide'
 ];
 
 const passwordRules = [
@@ -84,21 +93,29 @@ function navigateToRegister() {
 
 const login = async () => {
   loginError.value = '';
+
   const { valid } = await form.value.validate();
-  if (!valid) return;
+
+  if (!valid) {
+    return;
+  }
 
   loading.value = true;
+
   try {
-    await loginService.login({
-      email: username.value,
+    const response = await loginService.login({
+      email: email.value,
       password: password.value,
     });
+
+    localStorage.setItem('token', response.token);
     router.push('/');
   } catch (e) {
-    console.error('Erreur de login', e);
-    if (e.response && e.response.status === 401) {
-      loginError.value = 'Identifiant ou mot de passe incorrect';
-    } else if (e.response && e.response.data && e.response.data.message) {
+    if (!e.response) {
+      loginError.value = 'Erreur de connexion au serveur. Veuillez vérifier votre connexion internet.';
+    } else if (e.response.status !== 200) {
+      loginError.value = 'Email ou mot de passe incorrect';
+    } else if (e.response.data && e.response.data.message) {
       loginError.value = e.response.data.message;
     } else {
       loginError.value = 'Une erreur est survenue lors de la connexion. Veuillez réessayer.';
