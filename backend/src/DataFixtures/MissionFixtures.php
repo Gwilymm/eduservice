@@ -45,7 +45,7 @@ class MissionFixtures extends Fixture implements DependentFixtureInterface
 		$challengeReferences = [
 			ChallengeFixtures::CHALLENGE_2023_2024,
 			ChallengeFixtures::CHALLENGE_2024_2025,
-			ChallengeFixtures::CHALLENGE_2025_2026
+
 		];
 
 		// Pour chaque école, on crée des missions

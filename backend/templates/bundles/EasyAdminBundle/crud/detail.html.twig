@@ -1,0 +1,186 @@
+{% extends '@!EasyAdmin/crud/detail.html.twig' %}
+
+{% block main %}
+    {# Affichage du contenu normal de la page de détail #}
+    {{ parent() }}
+    
+    {# Vérifier si nous sommes sur l'entité User #}
+    {% if ea.crud.entityFqcn == 'App\\Entity\\User' %}
+        <div class="content-panel mt-4">
+            <div class="content-panel-body">
+                <h2>Missions par challenge</h2>
+                
+                {# Récupérer toutes les soumissions de l'utilisateur et filtrer par Challenge #}
+                {% set allSubmissions = entity.instance.missionSubmissions %}
+                
+                {# Récupérer tous les challenges uniques présents dans les soumissions #}
+                {% set uniqueChallenges = [] %}
+                {% for submission in allSubmissions %}
+                    {% if submission.mission and submission.mission.challenge %}
+                        {% set challenge = submission.mission.challenge %}
+                        {% set alreadyAdded = false %}
+                        
+                        {% for existingChallenge in uniqueChallenges %}
+                            {% if existingChallenge.id == challenge.id %}
+                                {% set alreadyAdded = true %}
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if not alreadyAdded %}
+                            {% set uniqueChallenges = uniqueChallenges|merge([challenge]) %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
+                {% if uniqueChallenges|length > 0 %}
+                    {% for challenge in uniqueChallenges %}
+                        <div class="card mb-4">
+                            <div class="card-header badge-light">
+                                <h3 class="mb-0">Challenge : {{ challenge.academicYear }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mission</th>
+                                            <th>Points</th>
+                                            <th>Statut</th>
+                                            <th>Date de soumission</th>
+                                            <th>Date de validation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for submission in allSubmissions %}
+                                            {% if submission.mission and submission.mission.challenge and submission.mission.challenge.id == challenge.id %}
+                                                <tr>
+                                                    <td>{{ submission.mission.name }}</td>
+                                                    <td><span >{{ submission.mission.points }}</span></td>
+                                                    <td>
+                                                        {% if submission.status %}
+                                                            {% if submission.status.value == 'approved' %}
+                                                                <span class="badge badge-success">Approuvée</span>
+                                                            {% elseif submission.status.value == 'rejected' %}
+                                                                <span class="badge badge-danger">Rejetée</span>
+                                                                {% if submission.rejectionReason %}
+                                                                    <i class="fas fa-info-circle text-muted" 
+                                                                       data-bs-toggle="tooltip" 
+                                                                       title="{{ submission.rejectionReason }}"></i>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <span class="badge badge-warning">En attente</span>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <span class="badge badge-secondary">Non défini</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ submission.submissionDate|date('d/m/Y') }}</td>
+                                                    <td>{{ submission.validationDate ? submission.validationDate|date('d/m/Y') : '-' }}</td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="1">Total points (missions approuvées uniquement)</th>
+                                            <th colspan="4">
+                                                <span class="badge badge-primary">
+                                                    {% set challengeTotalPoints = 0 %}
+                                                    {% for submission in allSubmissions %}
+                                                        {% if submission.mission and submission.mission.challenge and submission.mission.challenge.id == challenge.id %}
+                                                            {% if submission.status and submission.status.value == 'approved' %}
+                                                                {% set challengeTotalPoints = challengeTotalPoints + submission.mission.points %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {{ challengeTotalPoints }}
+                                                </span>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">
+                        Cet utilisateur n'a pas encore de missions.
+                    </div>
+                {% endif %}
+                
+                {# Statistiques globales #}
+                {% set approvedCount = 0 %}
+                {% set rejectedCount = 0 %}
+                {% set pendingCount = 0 %}
+                {% set totalPoints = 0 %}
+                
+                {% for submission in allSubmissions %}
+                    {% if submission.status %}
+                        {% if submission.status.value == 'approved' %}
+                            {% set approvedCount = approvedCount + 1 %}
+                            {% set totalPoints = totalPoints + submission.mission.points %}
+                        {% elseif submission.status.value == 'rejected' %}
+                            {% set rejectedCount = rejectedCount + 1 %}
+                        {% elseif submission.status.value == 'submitted' %}
+                            {% set pendingCount = pendingCount + 1 %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
+                <div class="card mt-4">
+                    <div class="card-header badge-light">
+                        <h3 class="mb-0">Statistiques globales</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card badge-success badge-opacity-10 mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-0">{{ approvedCount }}</h5>
+                                        <p class="mb-0 text-success">Missions approuvées</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card badge-warning badge-opacity-10 mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-0">{{ pendingCount }}</h5>
+                                        <p class="mb-0 text-warning">Missions en attente</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card badge-danger badge-opacity-10 mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-0">{{ rejectedCount }}</h5>
+                                        <p class="mb-0 text-danger">Missions rejetées</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card badge-primary badge-opacity-10 mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-0">{{ totalPoints }}</h5>
+                                        <p class="mb-0 text-primary">Points totaux</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialiser les tooltips pour les raisons de rejet
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    });
+    </script>
+{% endblock %}

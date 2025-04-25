@@ -47,8 +47,7 @@ class DashboardController extends AbstractDashboardController
 
         // Section Classements
         yield MenuItem::section('Classements');
-        yield MenuItem::linkToRoute('Tableau des ambassadeurs', 'fa fa-star', 'admin_ambassador_ranking');
-        yield MenuItem::linkToCrud('Gestion des classements', 'fa fa-list-ol', Ranking::class);
+        yield MenuItem::linkToRoute('Classement des Ambassadeurs', 'fa fa-trophy', 'admin_rankings');
 
         // Section Configuration
         yield MenuItem::section('Configuration');

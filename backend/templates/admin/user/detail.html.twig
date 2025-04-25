@@ -1,0 +1,36 @@
+{% extends '@EasyAdmin/crud/detail.html.twig' %}
+
+{% block detail_contents %}
+    {# Affichage du contenu normal de la page de détail #}
+    {{ parent() }}
+    
+    <div class="content-panel">
+        <div class="content-panel-body without-header without-footer">
+            <h2>Test de la surcharge du template</h2>
+            
+            <div class="alert alert-success">
+                <p>Si vous voyez ce message, la surcharge du template fonctionne correctement!</p>
+            </div>
+
+            <div class="alert alert-info">
+                <p>Voici quelques informations sur l'utilisateur:</p>
+                <ul>
+                    <li>ID: {{ entity.instance.id }}</li>
+                    <li>Email: {{ entity.instance.email }}</li>
+                    <li>Prénom: {{ entity.instance.firstName }}</li>
+                    <li>Nom: {{ entity.instance.lastName }}</li>
+                </ul>
+            </div>
+
+            <h3>Accès aux soumissions</h3>
+            <div class="alert alert-info">
+                {% if entity.instance.missionSubmissions is defined %}
+                    <p>La propriété missionSubmissions existe.</p>
+                    <p>Nombre de soumissions: {{ entity.instance.missionSubmissions|length }}</p>
+                {% else %}
+                    <p>La propriété missionSubmissions n'existe pas.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

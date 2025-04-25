@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -13,9 +17,23 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserCrudController extends AbstractCrudController
 {
+	private EntityManagerInterface $entityManager;
+
+	public function __construct(EntityManagerInterface $entityManager)
+	{
+		$this->entityManager = $entityManager;
+	}
+
 	public static function getEntityFqcn(): string
 	{
 		return User::class;
+	}
+
+	public function configureCrud(Crud $crud): Crud
+	{
+		return $crud
+			->setEntityLabelInSingular('Utilisateur')
+			->setEntityLabelInPlural('Utilisateurs');
 	}
 
 	public function configureFields(string $pageName): iterable
@@ -35,7 +53,14 @@ class UserCrudController extends AbstractCrudController
 					'attr' => ['autocomplete' => 'new-password'],
 				]),
 			ArrayField::new('roles')
-				->setHelp('Format: ["ROLE_ADMIN"], ["ROLE_USER"], etc.'),
+				->setHelp('Format: ["ROLE_ADMIN"], ["ROLE_USER"], etc.')
+				->onlyOnForms(),
 		];
+	}
+
+	public function configureActions(Actions $actions): Actions
+	{
+		return $actions
+			->add(Crud::PAGE_INDEX, Action::DETAIL);
 	}
 }
