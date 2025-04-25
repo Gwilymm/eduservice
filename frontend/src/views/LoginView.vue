@@ -20,8 +20,9 @@
         </v-alert>
         
         <v-form ref="form" v-model="isFormValid" class="w-100" @submit.prevent="login">
-          <v-text-field v-model="username" label="Identifiant" outlined class="mb-6 text-field-large"
-            :rules="usernameRules" hide-details="auto" density="comfortable" variant="outlined" bg-color="white"></v-text-field>
+          <v-text-field v-model="email" label="Email" outlined class="mb-6 text-field-large"
+            :rules="emailRules" hide-details="auto" density="comfortable" variant="outlined" bg-color="white"
+            type="email"></v-text-field>
 
           <v-text-field v-model="password" label="Mot de passe" type="password" outlined class="mb-6 text-field-large"
             :rules="passwordRules" hide-details="auto" density="comfortable" variant="outlined"
@@ -61,15 +62,14 @@ import loginService from '@/api/loginService';
 const router = useRouter();
 const form = ref(null);
 const isFormValid = ref(false);
-const username = ref('');
+const email = ref('');
 const password = ref('');
 const loginError = ref('');
 const loading = ref(false);
 
-const usernameRules = [
-  v => !!v || 'L\'identifiant est requis',
-  v => (v && v.length >= 3) || 'L\'identifiant doit contenir au moins 3 caractères',
-  v => /^[a-zA-Z0-9._-]+$/.test(v) || 'L\'identifiant ne doit contenir que des caractères alphanumériques, points, tirets ou underscores'
+const emailRules = [
+  v => !!v || 'L\'email est requis',
+  v => /.+@.+\..+/.test(v) || 'L\'email doit être valide'
 ];
 
 const passwordRules = [
@@ -89,16 +89,23 @@ const login = async () => {
 
   loading.value = true;
   try {
-    await loginService.login({
-      email: username.value,
+    const response = await loginService.login({
+      email: email.value,
       password: password.value,
     });
+    
+    // Store the token
+    localStorage.setItem('token', response.token);
+    
     router.push('/');
   } catch (e) {
     console.error('Erreur de login', e);
-    if (e.response && e.response.status === 401) {
-      loginError.value = 'Identifiant ou mot de passe incorrect';
-    } else if (e.response && e.response.data && e.response.data.message) {
+    
+    if (!e.response) {
+      loginError.value = 'Erreur de connexion au serveur. Veuillez vérifier votre connexion internet.';
+    } else if (e.response.status !== 200) {
+      loginError.value = 'Email ou mot de passe incorrect';
+    } else if (e.response.data && e.response.data.message) {
       loginError.value = e.response.data.message;
     } else {
       loginError.value = 'Une erreur est survenue lors de la connexion. Veuillez réessayer.';
