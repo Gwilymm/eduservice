@@ -154,6 +154,7 @@ import { ref, watch, onMounted } from 'vue'
 import { useRegisterStore } from '@/stores/registerStore.js'
 import { useRouter } from 'vue-router'
 import schoolService from '@/api/schoolService.js'
+import { createUser } from '@/api/userService'
 
 const router = useRouter()
 const formStore = useRegisterStore()
@@ -238,11 +239,11 @@ function prevStep() {
 
 function updateSelectedMissions() {}
 
-function submitForm() {
+const submitForm = async() => {
   if (!formRef.value.validate()) {
     return
   }
-  console.log('Formulaire soumis avec :', localForm.value)
+  await createUser(localForm.value)
   formStore.resetForm()
   router.push('/')
 }
