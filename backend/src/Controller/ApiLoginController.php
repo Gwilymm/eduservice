@@ -40,6 +40,7 @@ class ApiLoginController extends AbstractController
 
 		// Return token in response for frontend storage
 		return new JsonResponse([
+			'id' => $user->getId(),
 			'token' => $token,
 		]);
 	}

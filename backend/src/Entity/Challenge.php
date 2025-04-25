@@ -145,4 +145,12 @@ class Challenge
 
         return $this;
     }
+
+    /**
+     * Convertit l'objet Challenge en chaîne pour l'affichage dans les formulaires et listes
+     */
+    public function __toString(): string
+    {
+        return $this->academicYear ?? 'Challenge #' . $this->id;
+    }
 }

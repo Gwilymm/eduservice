@@ -334,4 +334,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->schoolId = $schoolId;
         return $this;
     }
+
+    public function getFullName(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getFullName();
+    }
 }
