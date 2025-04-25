@@ -78,4 +78,9 @@ class Reward
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->title ?? 'Récompense #' . $this->id;
+    }
 }

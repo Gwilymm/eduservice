@@ -15,37 +15,63 @@
     </div>
 
     <div class="row mt-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card bg-light">
                 <div class="card-body">
                     <h5 class="card-title">Gestion des Missions</h5>
                     <p class="card-text">Ajoutez, modifiez ou supprimez des missions pour les challenges.</p>
-                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\MissionCrudController') }}" class="btn btn-primary">
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\MissionCrudController') }}" class="btn btn-primary">
                         Gérer les missions
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card bg-light">
                 <div class="card-body">
                     <h5 class="card-title">Gestion des Challenges</h5>
                     <p class="card-text">Administrez les challenges disponibles sur la plateforme.</p>
-                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\ChallengeCrudController') }}" class="btn btn-primary">
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\ChallengeCrudController') }}" class="btn btn-primary">
                         Gérer les challenges
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Soumissions de Missions</h5>
+                    <p class="card-text">Validez ou rejetez les soumissions de missions par les ambassadeurs.</p>
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\MissionSubmissionCrudController') }}" class="btn btn-primary">
+                        Gérer les soumissions
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
             <div class="card bg-light">
                 <div class="card-body">
                     <h5 class="card-title">Gestion des Utilisateurs</h5>
                     <p class="card-text">Gérez les comptes utilisateurs et leurs permissions.</p>
-                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\UserCrudController') }}" class="btn btn-primary">
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\UserCrudController') }}" class="btn btn-primary">
                         Gérer les utilisateurs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Écoles</h5>
+                    <p class="card-text">Gérez les écoles des ambassadeurs dans le système.</p>
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\SchoolCrudController') }}" class="btn btn-primary">
+                        Gérer les écoles
                     </a>
                 </div>
             </div>

@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Challenge;
 use App\Entity\Mission;
+use App\Entity\MissionSubmission;
+use App\Entity\School;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -35,13 +37,20 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
-        yield MenuItem::linkToCrud('Missions', 'fa fa-tasks', Mission::class);
 
-        // Autres menus pour les entités existantes
+        // Section Challenges et Missions
+        yield MenuItem::section('Gestion des défis');
         yield MenuItem::linkToCrud('Challenges', 'fa fa-trophy', Challenge::class);
+        yield MenuItem::linkToCrud('Missions', 'fa fa-tasks', Mission::class);
+        yield MenuItem::linkToCrud('Soumissions', 'fa fa-check-square', MissionSubmission::class);
+
+        // Section Configuration
+        yield MenuItem::section('Configuration');
+        yield MenuItem::linkToCrud('Écoles', 'fa fa-university', School::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
 
-        // Lien vers la partie frontend (ajustez la route selon votre configuration)
+        // Lien vers la partie frontend
+        yield MenuItem::section('Liens');
         yield MenuItem::linkToRoute('Retour au site', 'fa fa-undo', 'api_entrypoint');
     }
 }
