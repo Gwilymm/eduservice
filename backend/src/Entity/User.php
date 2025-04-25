@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Mission;
 use App\Entity\Ranking;
 use App\Dto\Input\UserInput;
+use App\Dto\Input\UserUpdateInput;
 use App\State\UserProcessor;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
@@ -43,7 +44,15 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         ),
         new Get(),                // GET /api/users/{id}
         new GetCollection(),      // GET /api/users
-        new Patch(),              // PATCH /api/users/{id}
+        new Patch(
+            input: UserUpdateInput::class,
+            processor: UserProcessor::class,
+            denormalizationContext: ['groups' => ['user:update']],
+            openapi: new Operation(
+                summary: 'Mise à jour d\'un utilisateur',
+                description: 'Modification d\'un utilisateur avec possibilité de ne pas modifier le mot de passe'
+            )
+        ),
         new Delete(),
     ]
 )]
@@ -69,6 +78,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    // Propriété non persistée pour le mot de passe en clair
+    private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
@@ -167,9 +179,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the plain password (non-persisted field)
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set the plain password (non-persisted field)
+     */
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
