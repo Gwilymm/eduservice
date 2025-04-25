@@ -7,6 +7,7 @@ use App\Entity\Mission;
 use App\Entity\MissionSubmission;
 use App\Entity\School;
 use App\Entity\User;
+use App\Entity\Ranking;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -43,6 +44,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Challenges', 'fa fa-trophy', Challenge::class);
         yield MenuItem::linkToCrud('Missions', 'fa fa-tasks', Mission::class);
         yield MenuItem::linkToCrud('Soumissions', 'fa fa-check-square', MissionSubmission::class);
+
+        // Section Classements
+        yield MenuItem::section('Classements');
+        yield MenuItem::linkToRoute('Tableau des ambassadeurs', 'fa fa-star', 'admin_ambassador_ranking');
+        yield MenuItem::linkToCrud('Gestion des classements', 'fa fa-list-ol', Ranking::class);
 
         // Section Configuration
         yield MenuItem::section('Configuration');
