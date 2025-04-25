@@ -2713,8 +2713,8 @@
                         "links": {}
                     }
                 },
-                "summary": "Creates a User resource.",
-                "description": "Creates a User resource.",
+                "summary": "Inscription d'un ambassadeur",
+                "description": "Cr\u00e9ation d'un ambassadeur",
                 "parameters": [],
                 "requestBody": {
                     "description": "The new User resource",
@@ -4742,7 +4742,7 @@
             },
             "User.UserInput-user.write": {
                 "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "description": "",
                 "deprecated": false,
                 "properties": {
                     "email": {
@@ -4773,7 +4773,7 @@
             },
             "User.UserInput.jsonld-user.write": {
                 "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "description": "",
                 "deprecated": false,
                 "properties": {
                     "email": {
@@ -4804,7 +4804,7 @@
             },
             "User.UserInput.jsonopenapi-user.write": {
                 "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "description": "",
                 "deprecated": false,
                 "properties": {
                     "email": {
@@ -4835,7 +4835,7 @@
             },
             "User.UserInput.jsonschema-user.write": {
                 "type": "object",
-                "description": "Cr\u00e9ation d'un ambassadeur avec un ID d'\u00e9cole.",
+                "description": "",
                 "deprecated": false,
                 "properties": {
                     "email": {

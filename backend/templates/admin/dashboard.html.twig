@@ -1,0 +1,54 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Administration Eduservices</h5>
+                    <p class="card-text">Bienvenue dans l'interface d'administration d'Eduservices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Missions</h5>
+                    <p class="card-text">Ajoutez, modifiez ou supprimez des missions pour les challenges.</p>
+                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\MissionCrudController') }}" class="btn btn-primary">
+                        Gérer les missions
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Challenges</h5>
+                    <p class="card-text">Administrez les challenges disponibles sur la plateforme.</p>
+                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\ChallengeCrudController') }}" class="btn btn-primary">
+                        Gérer les challenges
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Utilisateurs</h5>
+                    <p class="card-text">Gérez les comptes utilisateurs et leurs permissions.</p>
+                    <a href="{{ ea_url().setController('App\\\\Controller\\\\Admin\\\\UserCrudController') }}" class="btn btn-primary">
+                        Gérer les utilisateurs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
