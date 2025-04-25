@@ -77,6 +77,35 @@
                     :rules="[rules.required, rules.phone]"
                     required
                   ></v-text-field>
+                  <v-text-field
+                    v-model="localForm.password"
+                    label="Mot de passe"
+                    :rules="[rules.required, rules.password]"
+                    :type="showPassword ? 'text' : 'password'"
+                    class="full-width-input"
+                    required
+                  >
+                    <template v-slot:append>
+                      <v-icon @click="showPassword = !showPassword">
+                        {{ showPassword ? 'mdi-eye-off' : 'mdi-eye' }}
+                      </v-icon>
+                    </template>
+                  </v-text-field>
+
+                  <v-text-field
+                    v-model="localForm.confirmPassword"
+                    label="Confirmer le mot de passe"
+                    :rules="[rules.required, rules.confirmPassword]"
+                    :type="showConfirmPassword ? 'text' : 'password'"
+                    class="full-width-input"
+                    required
+                  >
+                    <template v-slot:append>
+                      <v-icon @click="showConfirmPassword = !showConfirmPassword">
+                        {{ showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye' }}
+                      </v-icon>
+                    </template>
+                  </v-text-field>
                 </v-card-text>
               </v-card>
             </template>
@@ -141,6 +170,8 @@ const localForm = ref({
   email: formStore.form.email,
   schoolEmail: formStore.form.schoolEmail,
   phone: formStore.form.phone,
+  password: formStore.form.password || '',
+  confirmPassword: formStore.form.confirmPassword || '',
   selectedMissions: formStore.form.selectedMissions.map((mission) => ({ ...mission })),
 })
 
@@ -178,11 +209,19 @@ onMounted(async () => {
   }
 })
 
+const showPassword = ref(false)
+const showConfirmPassword = ref(false)
+
 const rules = {
   required: (v) => !!v || 'Ce champ est requis',
   email: (v) =>
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) || 'Adresse e-mail invalide',
   phone: (v) => /^[0-9]{10}$/.test(v) || 'Le numéro doit contenir 10 chiffres',
+  password: (v) =>
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v) ||
+    'Le mot de passe doit contenir au moins 8 caractères dont 1 lettre et 1 chiffre',
+  confirmPassword: (v) =>
+    v === localForm.value.password || 'Les mots de passe ne correspondent pas',
 }
 
 function nextStep() {
