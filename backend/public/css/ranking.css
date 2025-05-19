@@ -1,0 +1,70 @@
+/* Style pour les badges et le tableau de classement dans EasyAdmin */
+
+/* Style des badges de rang */
+.badge {
+  display: inline-block;
+  padding: 0.5em 0.65em;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50rem;
+}
+
+/* Style spécifique pour le badge de rang */
+.field-rank .badge {
+  min-width: 30px;
+  height: 30px;
+  line-height: 20px;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour les badges des 3 premiers */
+td:first-child:nth-child(1) .badge {
+  background-color: gold !important;
+  color: #333;
+  font-size: 0.95em;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+td:first-child:nth-child(2) .badge {
+  background-color: silver !important;
+  color: #333;
+  box-shadow: 0 0 8px rgba(192, 192, 192, 0.6);
+}
+
+td:first-child:nth-child(3) .badge {
+  background-color: #cd7f32 !important; /* Bronze */
+  box-shadow: 0 0 8px rgba(205, 127, 50, 0.6);
+}
+
+/* Style pour le badge des points */
+.points-badge {
+  min-width: 60px;
+  font-size: 0.9em;
+  background-color: #28a745 !important;
+}
+
+/* Style des lignes du tableau */
+.ea-index-Ranking tr:hover {
+  transition: background-color 0.2s ease;
+  background-color: rgba(0, 123, 255, 0.05) !important;
+}
+
+/* Style pour les lignes du podium */
+.ea-index-Ranking tbody tr:nth-child(1) {
+  background-color: rgba(255, 215, 0, 0.05) !important;
+}
+
+.ea-index-Ranking tbody tr:nth-child(2) {
+  background-color: rgba(192, 192, 192, 0.05) !important;
+}
+
+.ea-index-Ranking tbody tr:nth-child(3) {
+  background-color: rgba(205, 127, 50, 0.05) !important;
+}

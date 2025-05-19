@@ -1,0 +1,161 @@
+/* Styles pour le tableau de classement des ambassadeurs */
+
+/* Style des cartes */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Style des badges de rang */
+.rank-badge {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #6c757d; /* Couleur par défaut pour les rangs normaux */
+}
+
+/* Style spécial pour les trois premiers rangs */
+.rank-1 {
+  background-color: gold;
+  color: #212529;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.rank-2 {
+  background-color: silver;
+  color: #212529;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  box-shadow: 0 0 8px rgba(192, 192, 192, 0.7);
+}
+
+.rank-3 {
+  background-color: #cd7f32; /* Bronze */
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  box-shadow: 0 0 6px rgba(205, 127, 50, 0.7);
+}
+
+/* Surlignage des lignes du podium */
+.top-rank {
+  font-weight: bold;
+}
+
+.top-1 {
+  background-color: rgba(255, 215, 0, 0.1) !important;
+}
+
+.top-2 {
+  background-color: rgba(192, 192, 192, 0.1) !important;
+}
+
+.top-3 {
+  background-color: rgba(205, 127, 50, 0.1) !important;
+}
+
+/* Badge de points */
+.points-badge {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  min-width: 60px;
+}
+
+/* Style des cartes de statistiques */
+.stat-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-title {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+/* Style du tableau de classement */
+.ambassador-ranking-table thead th,
+.school-ranking-table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Animation sur survol des lignes */
+.ambassador-ranking-table tbody tr,
+.school-ranking-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.ambassador-ranking-table tbody tr:hover,
+.school-ranking-table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.05) !important;
+}
+
+/* Style des formulaires de filtre */
+.filters .form-group {
+  margin-bottom: 0;
+}
+
+.filters label {
+  font-weight: 600;
+}
+
+.filters select.form-control {
+  min-width: 150px;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .filters {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .form-inline.d-flex {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .filters .form-group,
+  .filters .form-group select,
+  .filters button {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+}

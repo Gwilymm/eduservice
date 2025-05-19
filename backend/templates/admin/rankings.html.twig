@@ -1,0 +1,71 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Classement des Ambassadeurs{% endblock %}
+
+{% block main %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtres</h5>
+            <form method="get" action="{{ path('admin_rankings') }}" class="row g-3">
+                <div class="col-md-5">
+                    <label for="challenge" class="form-label">Challenge (Année académique)</label>
+                    <select id="challenge" name="challenge" class="form-select">
+                        <option value="">Tous les challenges</option>
+                        {% for challenge in challenges %}
+                            <option value="{{ challenge.id }}" {% if selectedChallenge == challenge.id %}selected{% endif %}>
+                                {{ challenge.academicYear }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="school" class="form-label">École</label>
+                    <select id="school" name="school" class="form-select">
+                        <option value="">Toutes les écoles</option>
+                        {% for school in schools %}
+                            <option value="{{ school.id }}" {% if selectedSchool == school.id %}selected{% endif %}>
+                                {{ school.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Ambassadeur</th>
+                            <th>École</th>
+                            <th>Challenge</th>
+                            <th>Total de points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ranking in rankings %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ ranking.firstName }} {{ ranking.lastName }}</td>
+                                <td>{{ ranking.schoolName }}</td>
+                                <td>{{ ranking.challengeName }}</td>
+                                <td class="text-end">{{ ranking.totalPoints }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Aucun résultat trouvé.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

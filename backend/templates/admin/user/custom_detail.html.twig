@@ -1,0 +1,145 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}Détail de l'utilisateur{% endblock %}
+
+{% block page_content %}
+    {# Informations de base de l'utilisateur #}
+    <div class="content-panel">
+        <div class="content-panel-body">
+            <h2>Informations de l'utilisateur</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <div class="field-label">ID</div>
+                        <div class="field-value">{{ user.id }}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Email</div>
+                        <div class="field-value">{{ user.email }}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Prénom</div>
+                        <div class="field-value">{{ user.firstName }}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Nom</div>
+                        <div class="field-value">{{ user.lastName }}</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <div class="field-label">Téléphone</div>
+                        <div class="field-value">{{ user.phoneNumber }}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">École</div>
+                        <div class="field-value">{{ user.school ? user.school.name : 'Non définie' }}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Rôles</div>
+                        <div class="field-value">
+                            {% for role in user.roles %}
+                                <span class="badge bg-secondary">{{ role }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Missions complétées par challenge #}
+    <div class="content-panel mt-4">
+        <div class="content-panel-header">
+            <h2>Missions complétées</h2>
+        </div>
+        <div class="content-panel-body">
+            {% if submissions_by_challenge|length > 0 %}
+                {% for challenge_id, challenge in submissions_by_challenge %}
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h3 class="mb-0">Challenge : {{ challenge.name }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mission</th>
+                                        <th>Points</th>
+                                        <th>Date de soumission</th>
+                                        <th>Date de validation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for submission in challenge.submissions %}
+                                        <tr>
+                                            <td>{{ submission.mission.name }}</td>
+                                            <td><span class="badge bg-success">{{ submission.mission.points }}</span></td>
+                                            <td>{{ submission.submissionDate|date('d/m/Y') }}</td>
+                                            <td>{{ submission.validationDate|date('d/m/Y') }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="1">Total</th>
+                                        <th>
+                                            <span class="badge bg-primary">
+                                                {{ challenge.total }}
+                                            </span>
+                                        </th>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    Cet utilisateur n'a pas encore de missions complétées.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Boutons d'action #}
+    <div class="content-panel-footer mt-4">
+        <div class="d-flex justify-content-between">
+            <a href="{{ ea_url().setController('App\\Controller\\Admin\\UserCrudController').setAction('index') }}" class="btn btn-secondary">Retour à la liste</a>
+            <div>
+                <a href="{{ ea_url().setController('App\\Controller\\Admin\\UserCrudController').setAction('edit').setEntityId(user.id) }}" class="btn btn-primary">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <style>
+        .field-group {
+            margin-bottom: 1rem;
+        }
+        .field-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .field-value {
+            margin-top: 0.25rem;
+        }
+        .content-panel {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.1);
+            padding: 1.5rem;
+        }
+        .content-panel-header {
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+        .content-panel-footer {
+            padding-top: 1rem;
+        }
+    </style>
+{% endblock %}
