@@ -17,9 +17,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
 use Doctrine\Common\Collections\Collection;
+use App\Controller\Api\CurrentUserController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
@@ -41,7 +44,20 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             ),
 
         ),
-        new Get(),                // GET /api/users/{id}
+        new Get(
+            uriTemplate: '/me',
+            controller: CurrentUserController::class,
+            read: false,                                    // désactive le provider
+            security: "is_granted('ROLE_USER')",
+            normalizationContext: [
+                'groups' => ['user:read'],
+                'enable_max_depth' => true
+            ],
+            openapi: new Operation(
+                summary: 'Récupère l’utilisateur connecté',
+                description: 'Retourne les infos de l’utilisateur du token'
+            )
+        ),            // GET /api/users/{id}
         new GetCollection(),      // GET /api/users
         new Patch(),              // PATCH /api/users/{id}
         new Delete(),
@@ -99,6 +115,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user:read'])]
+    #[MaxDepth(1)]
     private ?School $school = null;
 
     public function __construct()
@@ -333,6 +351,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->schoolId = $schoolId;
         return $this;
+    }
+
+    #[Groups(['user:read'])]
+    #[SerializedName('schoolName')]
+    public function getSchoolName(): ?string
+    {
+        return $this->school?->getName();
     }
 
     public function getFullName(): string

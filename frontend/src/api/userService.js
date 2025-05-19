@@ -97,11 +97,21 @@ export async function loginUser(credentials) {
   }
 }
 
+/**
+ * Récupère l’utilisateur courant via /api/me
+ * @returns {Promise<Object>}
+ */
+export async function getCurrentUser() {
+  const { data } = await api.get('/me')
+  return data
+}
+
 export default {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
-  loginUser
+  loginUser,
+  getCurrentUser
 };
