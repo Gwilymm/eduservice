@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\RewardRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RewardRepository::class)]
+#[ApiResource()]
 class Reward
 {
     #[ORM\Id]
