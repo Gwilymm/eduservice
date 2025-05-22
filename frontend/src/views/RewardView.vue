@@ -59,7 +59,7 @@ const fetchRewards = async () => {
   try {
     loading.value = true;
     const response = await getAllRewards();
-    rewards.value = response.member || [];
+    rewards.value = (response.member || []).sort((a, b) => a.minPoints - b.minPoints);
   } catch (error) {
     console.error('Erreur lors de la récupération des récompenses :', error);
     rewards.value = [];
