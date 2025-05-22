@@ -4,14 +4,15 @@
       <!-- Logo et titre -->
       <div class="d-flex flex-column align-center mt-8 mb-auto">
         <div class="logo-container">
-          <v-img :src="logo" max-width="200" height="140" class="mb-6" contain></v-img>
+          <v-img :src="logo" max-width="200" height="140" class="mb-6" contain @click="$router.push('/')"
+            style="cursor: pointer"></v-img>
         </div>
       </div>
 
       <template v-if="route.path !== '/login' && route.path !== '/register'">
         <div class="d-flex flex-column align-center mb-12">
           <!-- Select année scolaire -->
-          <div class="select-container mb-6">
+          <!-- <div class="select-container mb-6">
             <v-select
               label="Année scolaire"
               :items="schoolYears"
@@ -20,7 +21,7 @@
               class="select-annee"
               hide-details
             ></v-select>
-          </div>
+          </div> -->
 
           <!-- Bouton présentation -->
           <div class="d-flex justify-center">
@@ -132,6 +133,7 @@ function handleLogout() {
 
 .select-annee {
   width: 100%;
+
   :deep(.v-field) {
     background: white;
     border-radius: 0;
