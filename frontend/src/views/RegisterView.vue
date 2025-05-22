@@ -219,8 +219,8 @@ const rules = {
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) || 'Adresse e-mail invalide',
   phoneNumber: (v) => /^[0-9]{10}$/.test(v) || 'Le numéro doit contenir 10 chiffres',
   password: (v) =>
-    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v) ||
-    'Le mot de passe doit contenir au moins 8 caractères dont 1 lettre et 1 chiffre',
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v) ||
+    'Le mot de passe doit contenir au moins 8 caractères dont 1 lettre, 1 chiffre et 1 caractère spécial',
   confirmPassword: (v) =>
     v === localForm.value.password || 'Les mots de passe ne correspondent pas',
 }

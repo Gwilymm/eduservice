@@ -97,7 +97,11 @@
           <h3 class="text-center mb-8 text-h5">
             Consulter la présentation du Challenge Ambassadeur
           </h3>
-          <v-btn text class="text-decoration-underline text-body-1" size="large"
+          <v-btn
+            text
+            class="text-decoration-underline text-body-1"
+            size="large"
+            @click="openPdfInNewTab"
             >Challenge Ambassadeur</v-btn
           >
         </v-card>
@@ -110,6 +114,7 @@ import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import loginService from '@/api/loginService'
 import { useAuthStore } from '@/stores/auth'
+import pdfFile from '@/assets/autorisation_diffusion.pdf'
 
 const router = useRouter()
 const form = ref(null)
@@ -137,6 +142,11 @@ function navigateToRegister() {
   router.push({ name: 'register' })
 }
 
+const openPdfInNewTab = () => {
+  const pdfUrl = pdfFile
+  window.open(pdfUrl, '_blank', 'noopener,noreferrer')
+}
+
 const login = async () => {
   loginError.value = ''
 
@@ -153,7 +163,7 @@ const login = async () => {
       email: email.value,
       password: password.value,
     })
-    console.log('Réponse de connexion:', response)
+  
 
     auth.login(response.token)
   } catch (e) {
