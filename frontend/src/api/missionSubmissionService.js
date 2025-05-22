@@ -82,10 +82,33 @@ export async function deleteMissionSubmission(id) {
 	}
 }
 
+/**
+ * Upload un fichier et retourne son URL
+ * @param {File} file - Fichier à uploader
+ * @returns {Promise<string>} - URL du fichier uploadé
+ */
+export async function uploadFile(file) {
+	const formData = new FormData();
+	formData.append('file', file);
+
+	try {
+		const response = await api.post('/upload', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		return response.data.url; // On suppose que le backend renvoie l'URL dans data.url
+	} catch (error) {
+		console.error('Erreur lors de l\'upload du fichier :', error);
+		throw error;
+	}
+}
+
 export default {
 	getAllMissionSubmissions,
 	getMissionSubmissionById,
 	createMissionSubmission,
 	updateMissionSubmission,
-	deleteMissionSubmission
+	deleteMissionSubmission,
+	uploadFile,
 };

@@ -13,13 +13,13 @@
       <p class="mt-4">Chargement des missions...</p>
     </div>
 
-    <!-- Message d'erreur -->
-    <v-alert v-if="missionStore.error" type="error" class="mb-4" dismissible>
+    <!-- Snackbar d'erreur -->
+    <v-snackbar v-model="errorSnackbar" color="error" timeout="6000" top>
       {{ missionStore.error }}
-      <template v-slot:append>
-        <v-btn size="small" @click="loadMissions">Réessayer</v-btn>
+      <template #action>
+        <v-btn text @click="loadMissions">Réessayer</v-btn>
       </template>
-    </v-alert>
+    </v-snackbar>
 
     <!-- Liste des missions -->
     <div v-if="!missionStore.loading && !missionStore.error" class="mission-list">
@@ -50,12 +50,16 @@
                 </div>
               </template>
             </v-checkbox>
-
           </v-col>
         </v-row>
       </v-container>
     </div>
-
+    <v-container class="mt-4">
+      <v-alert type="info" variant="outlined" border="start" color="blue" density="comfortable"
+        icon="mdi-information-outline">
+        Chaque mission cochée devra être validée selon toutes les conditions avant de pouvoir déposer une preuve.
+      </v-alert>
+    </v-container>
     <!-- Bouton de validation -->
     <div v-if="!missionStore.loading" class="d-flex justify-end mt-6">
       <v-btn prepend-icon="mdi-file-document-check-outline" color="primary" size="large" @click="goToJustification"
@@ -64,24 +68,30 @@
       </v-btn>
     </div>
 
-    <!-- Message d'information -->
-    <v-alert color="warning" class="mt-8" variant="tonal" border="start" density="comfortable" elevation="0">
-      <v-icon start color="warning">mdi-alert-circle-outline</v-icon>
-      Chaque mission cochée devra être validée selon toutes les conditions avant de pouvoir déposer une preuve.
-    </v-alert>
+
   </div>
 </template>
 
-
-
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMissionStore } from '@/stores/missionStore';
 
 const missionStore = useMissionStore();
 const router = useRouter();
 const submitting = ref(false);
+
+// Etats pour snackbars
+const errorSnackbar = ref(false);
+const infoSnackbar = ref(false);
+
+// Afficher snackbar erreur quand il y a une erreur dans le store
+watch(() => missionStore.error, (newError) => {
+  if (newError) {
+    errorSnackbar.value = true;
+  }
+});
+
 
 // État local pour gérer les sélections
 const missionSelections = ref(new Map());
@@ -144,7 +154,6 @@ const loadMissions = async () => {
 
 // Charger les missions au montage du composant
 onMounted(async () => {
-  // Charger les missions seulement si elles ne sont pas déjà chargées
   if (missionStore.missions.length === 0) {
     await loadMissions();
   }
@@ -152,7 +161,6 @@ onMounted(async () => {
 
 // Watcher pour les changements de sélection
 availableMissions.value.forEach(mission => {
-  const originalSelected = mission.selected;
   Object.defineProperty(mission, 'selected', {
     get() {
       return missionSelections.value.get(mission.id) || false;
@@ -162,7 +170,6 @@ availableMissions.value.forEach(mission => {
     }
   });
 });
-
 </script>
 
 <style scoped>
