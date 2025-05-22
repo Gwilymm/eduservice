@@ -39,7 +39,7 @@
               </div>
               <div class="d-flex mb-2">
                 <div class="info-label">Mail école :</div>
-                <div>{{ user.userIdentifier }}</div>
+                <div>{{ user.schoolmail }}</div>
               </div>
             </v-col>
           </v-row>
