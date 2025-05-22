@@ -11,7 +11,7 @@
             "description": ""
         }
     ],
-    "paths": {
+    "paths": {²
         "/api/challenges": {
             "get": {
                 "operationId": "api_challenges_get_collection",

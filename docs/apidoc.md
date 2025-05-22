@@ -1,14 +1,11 @@
 ---
 title: Eduservice API v1.0.0
 language_tabs:
-  - shell: Shell
-  - http: HTTP
   - javascript: JavaScript
-  - ruby: Ruby
-  - python: Python
   - php: PHP
-  - java: Java
-  - go: Go
+language_clients:
+  - javascript: ""
+  - php: ""
 toc_footers: []
 includes: []
 search: true
@@ -41,20 +38,6 @@ Base URLs:
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/challenges \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/challenges HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -72,34 +55,6 @@ fetch('/api/challenges',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/challenges',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/challenges', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -131,48 +86,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/challenges");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/challenges", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -311,22 +224,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/challenges \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/challenges HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "academicYear": "string",
@@ -355,36 +252,6 @@ fetch('/api/challenges',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/challenges',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/challenges', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -417,49 +284,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/challenges");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/challenges", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -531,20 +355,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/challenges/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/challenges/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -562,34 +372,6 @@ fetch('/api/challenges/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/challenges/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/challenges/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -621,48 +403,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/challenges/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/challenges/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -717,20 +457,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/challenges/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/challenges/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -748,34 +474,6 @@ fetch('/api/challenges/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/challenges/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/challenges/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -807,48 +505,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/challenges/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/challenges/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -899,22 +555,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/challenges/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/challenges/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "academicYear": "string",
@@ -943,36 +583,6 @@ fetch('/api/challenges/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/challenges/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/challenges/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -1005,49 +615,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/challenges/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/challenges/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -1123,20 +690,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/missions \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/missions HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -1154,34 +707,6 @@ fetch('/api/missions',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/missions',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/missions', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -1213,48 +738,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/missions");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/missions", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -1405,22 +888,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/missions \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/missions HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "name": "string",
@@ -1455,36 +922,6 @@ fetch('/api/missions',
 
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/missions',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/missions', headers = headers)
-
-print(r.json())
-
-```
-
 ```php
 <?php
 
@@ -1514,49 +951,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/missions");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/missions", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -1634,20 +1028,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/missions/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/missions/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -1665,34 +1045,6 @@ fetch('/api/missions/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/missions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/missions/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -1724,48 +1076,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/missions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/missions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -1823,20 +1133,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/missions/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/missions/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -1854,34 +1150,6 @@ fetch('/api/missions/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/missions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/missions/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -1913,48 +1181,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/missions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/missions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -2005,22 +1231,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/missions/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/missions/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "name": "string",
@@ -2055,36 +1265,6 @@ fetch('/api/missions/{id}',
 
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/missions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/missions/{id}', headers = headers)
-
-print(r.json())
-
-```
-
 ```php
 <?php
 
@@ -2114,49 +1294,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/missions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/missions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -2238,20 +1375,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/mission_submissions \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/mission_submissions HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -2269,34 +1392,6 @@ fetch('/api/mission_submissions',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/mission_submissions',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/mission_submissions', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -2328,48 +1423,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/mission_submissions");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/mission_submissions", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -2513,22 +1566,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/mission_submissions \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/mission_submissions HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "ambassador": "https://example.com/",
@@ -2556,36 +1593,6 @@ fetch('/api/mission_submissions',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/mission_submissions',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/mission_submissions', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -2618,49 +1625,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/mission_submissions");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/mission_submissions", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -2730,20 +1694,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/mission_submissions/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/mission_submissions/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -2761,34 +1711,6 @@ fetch('/api/mission_submissions/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/mission_submissions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/mission_submissions/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -2820,48 +1742,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/mission_submissions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/mission_submissions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -2915,20 +1795,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/mission_submissions/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/mission_submissions/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -2946,34 +1812,6 @@ fetch('/api/mission_submissions/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/mission_submissions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/mission_submissions/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -3005,48 +1843,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/mission_submissions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/mission_submissions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -3097,22 +1893,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/mission_submissions/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/mission_submissions/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "ambassador": "https://example.com/",
@@ -3140,36 +1920,6 @@ fetch('/api/mission_submissions/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/mission_submissions/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/mission_submissions/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -3202,49 +1952,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/mission_submissions/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/mission_submissions/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -3318,20 +2025,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/rankings \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/rankings HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -3349,34 +2042,6 @@ fetch('/api/rankings',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/rankings',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/rankings', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -3408,48 +2073,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/rankings");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/rankings", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -3580,22 +2203,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/rankings \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/rankings HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "ambassador": "https://example.com/",
@@ -3618,36 +2225,6 @@ fetch('/api/rankings',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/rankings',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/rankings', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -3680,49 +2257,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/rankings");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/rankings", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -3782,20 +2316,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/rankings/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/rankings/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -3813,34 +2333,6 @@ fetch('/api/rankings/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/rankings/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/rankings/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -3872,48 +2364,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/rankings/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/rankings/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -3962,20 +2412,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/rankings/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/rankings/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -3993,34 +2429,6 @@ fetch('/api/rankings/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/rankings/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/rankings/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -4052,48 +2460,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/rankings/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/rankings/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -4144,22 +2510,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/rankings/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/rankings/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "ambassador": "https://example.com/",
@@ -4182,36 +2532,6 @@ fetch('/api/rankings/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/rankings/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/rankings/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -4244,49 +2564,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/rankings/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/rankings/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -4350,20 +2627,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/schools \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/schools HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -4381,34 +2644,6 @@ fetch('/api/schools',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/schools',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/schools', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -4440,48 +2675,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/schools");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/schools", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -4612,22 +2805,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/schools \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/schools HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "name": "string",
@@ -4651,36 +2828,6 @@ fetch('/api/schools',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/schools',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/schools', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -4713,49 +2860,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/schools");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/schools", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -4817,20 +2921,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/schools/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/schools/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -4848,34 +2938,6 @@ fetch('/api/schools/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/schools/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/schools/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -4907,48 +2969,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/schools/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/schools/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -4998,20 +3018,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/schools/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/schools/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -5029,34 +3035,6 @@ fetch('/api/schools/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/schools/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/schools/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -5088,48 +3066,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/schools/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/schools/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -5180,22 +3116,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/schools/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/schools/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "name": "string",
@@ -5219,36 +3139,6 @@ fetch('/api/schools/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/schools/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/schools/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -5281,49 +3171,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/schools/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/schools/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -5389,20 +3236,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/me \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/me HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -5420,34 +3253,6 @@ fetch('/api/me',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/me',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/me', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -5479,48 +3284,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/me");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/me", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -5562,22 +3325,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/register \
-  -H 'Content-Type: application/ld+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-POST /api/register HTTP/1.1
-
-Content-Type: application/ld+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "email": "string",
@@ -5603,36 +3350,6 @@ fetch('/api/register',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/ld+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.post '/api/register',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/ld+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.post('/api/register', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -5665,49 +3382,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/register");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/ld+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/register", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -5767,20 +3441,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /api/users \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-GET /api/users HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -5798,34 +3458,6 @@ fetch('/api/users',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.get '/api/users',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.get('/api/users', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -5857,48 +3489,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/users");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/api/users", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -6062,20 +3652,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X DELETE /api/users/{id} \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-DELETE /api/users/{id} HTTP/1.1
-
-Accept: application/ld+json
-
-```
-
 ```javascript
 
 const headers = {
@@ -6093,34 +3669,6 @@ fetch('/api/users/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.delete '/api/users/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/ld+json'
-}
-
-r = requests.delete('/api/users/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -6152,48 +3700,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/users/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/api/users/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -6245,22 +3751,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /api/users/{id} \
-  -H 'Content-Type: application/merge-patch+json' \
-  -H 'Accept: application/ld+json'
-
-```
-
-```http
-PATCH /api/users/{id} HTTP/1.1
-
-Content-Type: application/merge-patch+json
-Accept: application/ld+json
-
-```
-
 ```javascript
 const inputBody = '{
   "email": "string",
@@ -6286,36 +3776,6 @@ fetch('/api/users/{id}',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/merge-patch+json',
-  'Accept' => 'application/ld+json'
-}
-
-result = RestClient.patch '/api/users/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/merge-patch+json',
-  'Accept': 'application/ld+json'
-}
-
-r = requests.patch('/api/users/{id}', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -6348,49 +3808,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/users/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PATCH");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/merge-patch+json"},
-        "Accept": []string{"application/ld+json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/api/users/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -6478,22 +3895,6 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /api/login \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST /api/login HTTP/1.1
-
-Content-Type: application/json
-Accept: application/json
-
-```
-
 ```javascript
 const inputBody = '{
   "email": "string",
@@ -6515,36 +3916,6 @@ fetch('/api/login',
 }).then(function(body) {
     console.log(body);
 });
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post '/api/login',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('/api/login', headers = headers)
-
-print(r.json())
 
 ```
 
@@ -6577,49 +3948,6 @@ try {
  }
 
  // ...
-
-```
-
-```java
-URL obj = new URL("/api/login");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        "Accept": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/api/login", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
