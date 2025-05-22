@@ -25,4 +25,10 @@ class UserInput
     #[Groups(['user:write'])]
     #[NotBlank]
     public int $school; // ici on accepte l'ID brut
+
+    #[Groups(['user:write'])]
+    public ?string $schoolMail = null;
+
+    #[Groups(['user:write'])]
+    public ?string $section = null;
 }

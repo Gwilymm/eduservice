@@ -372,6 +372,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // Ce champ n’est pas en base, juste utilisé pour la désérialisation
     private ?int $schoolId = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $schoolmail = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $section = null;
+
     public function getSchoolId(): ?int
     {
         return $this->schoolId;
@@ -398,5 +404,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->getFullName();
+    }
+
+    public function getSchoolmail(): ?string
+    {
+        return $this->schoolmail;
+    }
+
+    public function setSchoolmail(string $schoolmail): static
+    {
+        $this->schoolmail = $schoolmail;
+
+        return $this;
+    }
+
+    public function getSection(): ?string
+    {
+        return $this->section;
+    }
+
+    public function setSection(string $section): static
+    {
+        $this->section = $section;
+
+        return $this;
     }
 }
