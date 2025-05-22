@@ -72,16 +72,13 @@ security:
   access_control:
     # Protection de l'admin : seuls les admins peuvent accéder à /admin
     - { path: ^/admin/login, roles: PUBLIC_ACCESS }
-    - { path: ^/admin, roles: ROLE_ADMIN }
-    # Protection de l'admin : seuls les admins peuvent accéder à /admin
-    - { path: ^/admin/login, roles: PUBLIC_ACCESS }
-    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/admin, roles: PUBLIC_ACCESS }
     # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
     - { path: ^/api/register, roles: PUBLIC_ACCESS }
     - { path: ^/api/docs, roles: PUBLIC_ACCESS }
     - { path: ^/api/schools, roles: PUBLIC_ACCESS }
-    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api, roles: PUBLIC_ACCESS }
 
 when@test:
   security:
