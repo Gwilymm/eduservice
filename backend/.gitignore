@@ -12,3 +12,5 @@
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 digest.txt
+
+/public/uploads/*
