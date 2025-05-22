@@ -16,8 +16,13 @@ security:
     main:
       lazy: true
       provider: app_user_provider
-      stateless: true
-      jwt: ~
+      form_login:
+        login_path: app_login
+        check_path: app_login
+        enable_csrf: true
+      logout:
+        path: app_logout
+      # entry_point: form_login
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -28,12 +33,12 @@ security:
       pattern: ^/admin
       provider: app_user_provider
       form_login:
-        login_path: admin_login
-        check_path: admin_login
-        default_target_path: admin
+        login_path: app_login
+        check_path: app_login
+        enable_csrf: true
       logout:
-        path: admin_logout
-        target: admin_login
+        path: app_logout
+        target: app_login
       stateless: false
     login:
       pattern: ^/api/login

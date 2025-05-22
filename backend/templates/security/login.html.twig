@@ -1,8 +1,6 @@
-{# templates/admin/security/login.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion Admin{% endblock %}
-
+{% block title %}Log in!{% endblock %}
 {% block stylesheets %}
     <style>
         body {
@@ -89,16 +87,15 @@
         }
     </style>
 {% endblock %}
-
 {% block body %}
-    <div class="admin-login-container">
-    <div style="height: 100px; width: 100%;"></div>
+    <form method="post">
+      <div class="admin-login-container">
+        <div style="height: 100px; width: 100%;"></div>
         <div class="admin-login-card">
-            <div class="admin-login-title">Connexion à l'administration</div>
+            <div class="admin-login-title">Connexion à l'administrationde mes couilles</div>
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-            <form method="post" action="{{ path('admin_login') }}">
                 <div style="margin-bottom: 1.2rem;">
                     <label for="username" class="form-label">Email</label>
                     <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" required autofocus autocomplete="username">
@@ -108,18 +105,25 @@
                     <input type="password" name="_password" id="password" class="form-control" required autocomplete="current-password">
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="hidden" name="_target_path" value="/admin" />
                 <button class="btn btn-primary" type="submit">Se connecter</button>
-            </form>
+                {% if admin_jwt %}
+                    <div style="margin: 1.5rem auto; max-width: 400px; word-break: break-all; background: #f8f9fa; color: #333; border-radius: 8px; padding: 1rem; font-size: 0.95rem;">
+                        <strong>Jeton JWT admin (pour appels API) :</strong><br>
+                        <code>{{ admin_jwt }}</code>
+                    </div>
+                {% endif %}
         </div>
-		<div class="admin-login-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 48px; margin-bottom: 24px;">
-			<img src="{{ asset('img/Logo Eduservices/Campus Caen_Bleu_Vertical.png') }}" alt="Eduservices" style="height: 38px;" loading="lazy" />
-			<img src="{{ asset('img/AFTEC.png') }}" alt="AFTEC" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/MBWAY.png') }}" alt="MBway" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/WIN.png') }}" alt="WIN" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/IHECF.png') }}" alt="IHECF" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/MDS.png') }}" alt="MyDigitalSchool" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/TUNON (2).png') }}" alt="TUNON" style="height: 32px;" loading="lazy" />
-			<img src="{{ asset('img/IBF.png') }}" alt="Ipac Bachelor Factory" style="height: 32px;" loading="lazy" />
-		</div>
-    </div>
+        <div class="admin-login-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 48px; margin-bottom: 24px;">
+            <img src="{{ asset('img/Logo Eduservices/Campus Caen_Bleu_Vertical.png') }}" alt="Eduservices" style="height: 38px;" loading="lazy" />
+            <img src="{{ asset('img/AFTEC.png') }}" alt="AFTEC" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/MBWAY.png') }}" alt="MBway" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/WIN.png') }}" alt="WIN" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/IHECF.png') }}" alt="IHECF" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/MDS.png') }}" alt="MyDigitalSchool" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/TUNON (2).png') }}" alt="TUNON" style="height: 32px;" loading="lazy" />
+            <img src="{{ asset('img/IBF.png') }}" alt="Ipac Bachelor Factory" style="height: 32px;" loading="lazy" />
+        </div>
+      </div>
+    </form>
 {% endblock %}
