@@ -131,50 +131,27 @@ async function fetchUser() {
   try {
     user.value = await getCurrentUser()
     console.log('user', user.value)
-    snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
+    // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
   } catch {
-    snackbar.value = { show: true, text: 'Erreur chargement user', color: 'error' }
+    snackbar.value = { show: true, text: 'Erreur de chargement des données de l\'utiliateur', color: 'error' }
   } finally {
     loading.value = false
   }
 }
-
-// Données en dur pour l'utilisateur
-const user2 = ref({
-  firstName: 'Lucas',
-  lastName: 'MARTIN',
-  email: 'lucas.martin@gmail.com',
-  phoneNumber: '07 08 09 10 11',
-  shcoolName: 'MyDigtialSchool',
-  class: 'DAD 2',
-  schoolMail: 'lucas.martin@my-digital-school.org',
-  isAuthorizationAccepted: true,
-  points: 268,
-  updatedPointsDate: '2024-01-10',
-  completedMissions: [
-    { id: 1, title: 'Mission 1', isCompleted: true },
-    { id: 2, title: 'Mission 2', isCompleted: true },
-    { id: 3, title: 'Mission 3', isCompleted: true },
-    { id: 4, title: 'Mission 4', isCompleted: true },
-  ],
-  giftPotential: 'Séjour à Disneyland',
-  rank: 2,
-  totalParticipants: 9,
-})
 
 const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
 
-const downloadAuthorization = async () => {
-  try {
-    loading.value = true
-    await new Promise((resolve) => setTimeout(resolve, 300))
-    showSuccess('Autorisation téléchargée avec succès')
-  } catch (error) {
-    showError("Erreur lors du téléchargement de l'autorisation")
-  } finally {
-    loading.value = false
-  }
-}
+// const downloadAuthorization = async () => {
+//   try {
+//     loading.value = true
+//     await new Promise((resolve) => setTimeout(resolve, 300))
+//     showSuccess('Autorisation téléchargée avec succès')
+//   } catch (error) {
+//     showError("Erreur lors du téléchargement de l'autorisation")
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
 const viewMissionDetails = async () => {
   try {
@@ -218,7 +195,7 @@ const showSuccess = (message) => {
 
 onMounted(async () => {
   await fetchUser()
-  await downloadAuthorization()
+  // await downloadAuthorization()
 })
 </script>
 
