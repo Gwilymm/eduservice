@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="d-flex justify-space-between align-center mb-6">
-      <h1 class="text-h4">Mes missions réalisées</h1>
+      <h1 class="text-h4">Missions</h1>
       <v-btn
         color="primary"
         variant="text"
@@ -12,7 +12,22 @@
       </v-btn>
     </div>
 
-    <v-table>
+    <v-progress-circular v-if="loading" indeterminate color="primary" class="mx-auto d-block my-8"></v-progress-circular>
+
+    <div v-else-if="missions.length === 0" class="text-center my-8">
+      <v-icon icon="mdi-alert-circle-outline" size="large" color="info" class="mb-4"></v-icon>
+      <h3 class="text-h5 mb-4">Vous n'avez pas encore de missions</h3>
+      <p class="mb-6 text-body-1">Commencez par ajouter votre première mission pour accumuler des points.</p>
+      <v-btn 
+        color="primary" 
+        prepend-icon="mdi-plus" 
+        @click="router.push('/missions/add')"
+      >
+        Ajouter une mission
+      </v-btn>
+    </div>
+
+    <v-table v-else>
       <tbody>
         <tr
           v-for="mission in missions"
@@ -20,24 +35,24 @@
           :class="{ 'striped': mission.id % 2 === 0 }"
         >
           <td class="mission-title">
-            {{ mission.title }}
+            {{ mission.title || mission.name }}
             <v-icon
-              v-if="mission.fileType"
-              :icon="getFileIcon(mission.fileType)"
-              :color="getFileColor(mission.fileType)"
+              v-if="mission.proofPath"
+              :icon="getFileIcon(getFileType(mission.proofPath))"
+              :color="getFileColor(getFileType(mission.proofPath))"
               size="small"
               class="ml-2"
             ></v-icon>
           </td>
-          <td class="text-center">{{ formatDate(mission.date) }}</td>
-          <td class="text-center">{{ mission.points }} points</td>
+          <td class="text-center">{{ formatDate(mission.submissionDate) }}</td>
+          <td class="text-center">{{ mission.points || mission.mission?.points }} points</td>
           <td class="text-center">
             <v-chip
-              :color="mission.status === 'validated' ? 'success' : 'warning'"
+              :color="getStatusColor(mission.status)"
               size="small"
               class="status-chip"
             >
-              {{ mission.status === 'validated' ? 'Validée' : 'En attente de validation' }}
+              {{ getStatusText(mission.status) }}
             </v-chip>
           </td>
         </tr>
@@ -47,13 +62,47 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { getAllMissionSubmissions } from '@/api/missionSubmissionService';
 
 const router = useRouter();
+const missions = ref([]);
+const loading = ref(true);
+
+
+const fetchUserMissions = async () => {
+  try {
+    loading.value = true;
+    const response = await getAllMissionSubmissions();
+    if (response && Array.isArray(response['hydra:member'])) {
+      missions.value = response['hydra:member'];
+    } else {
+      missions.value = [];
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des missions:', error);
+    missions.value = [];
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchUserMissions();
+});
 
 const formatDate = (date) => {
+  if (!date) return '-';
   return new Date(date).toLocaleDateString('fr-FR');
+};
+
+const getFileType = (path) => {
+  if (!path) return null;
+  if (path.endsWith('.pdf')) return 'pdf';
+  if (path.match(/\.(jpg|jpeg|png|gif|webp)$/i)) return 'image';
+  if (path.match(/\.(mp4|mov|avi|wmv|flv|mkv)$/i)) return 'video';
+  return null;
 };
 
 const getFileIcon = (type) => {
@@ -82,73 +131,33 @@ const getFileColor = (type) => {
   }
 };
 
-// Données de test
-const missions = ref([
-  {
-    id: 1,
-    title: 'Intervention lycée',
-    date: '2024-12-04',
-    points: 30,
-    status: 'pending',
-    fileType: 'pdf'
-  },
-  {
-    id: 2,
-    title: 'Shooting photos',
-    date: '2024-12-04',
-    points: 20,
-    status: 'validated',
-    fileType: 'image'
-  },
-  {
-    id: 3,
-    title: 'Événement',
-    date: '2024-12-04',
-    points: 30,
-    status: 'validated',
-    fileType: null
-  },
-  {
-    id: 4,
-    title: 'Événement',
-    date: '2024-12-04',
-    points: 30,
-    status: 'validated',
-    fileType: null
-  },
-  {
-    id: 5,
-    title: 'Témoignage',
-    date: '2024-12-04',
-    points: 10,
-    status: 'validated',
-    fileType: 'pdf'
-  },
-  {
-    id: 6,
-    title: 'Post RS',
-    date: '2024-12-04',
-    points: 3,
-    status: 'validated',
-    fileType: 'video'
-  },
-  {
-    id: 7,
-    title: 'Avis E-réputation',
-    date: '2024-12-04',
-    points: 5,
-    status: 'validated',
-    fileType: 'image'
-  },
-  {
-    id: 8,
-    title: 'Avis E-réputation',
-    date: '2024-12-04',
-    points: 5,
-    status: 'validated',
-    fileType: 'image'
+const getStatusColor = (status) => {
+  if (!status) return 'warning';
+  
+  switch (status) {
+    case 'approved':
+      return 'success';
+    case 'rejected':
+      return 'error';
+    case 'pending':
+    default:
+      return 'warning';
   }
-]);
+};
+
+const getStatusText = (status) => {
+  if (!status) return 'En attente de validation';
+  
+  switch (status) {
+    case 'approved':
+      return 'Validée';
+    case 'rejected':
+      return 'Refusée';
+    case 'pending':
+    default:
+      return 'En attente de validation';
+  }
+};
 </script>
 
 <style scoped>
@@ -183,4 +192,4 @@ td {
   height: 48px !important;
   padding: 8px 16px !important;
 }
-</style> 
+</style>
