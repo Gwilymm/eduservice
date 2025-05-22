@@ -12,7 +12,11 @@ post {
 
 body:json {
   {
-    "email": "",
-    "password": ""
+    "email": "marin.davies5@gmail.com",
+    "password": "AZErty1234"
   }
+}
+
+script:post-response {
+  bru.setEnvVar("Bearer","Bearer "+ res.body.token);
 }

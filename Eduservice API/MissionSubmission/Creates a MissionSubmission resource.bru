@@ -6,8 +6,24 @@ meta {
 
 post {
   url: {{baseUrl}}/api/mission_submissions
-  body: none
-  auth: none
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc5MjM0MTMsImV4cCI6MTc0NzkyNzAxMywicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6Im1hcmluLmRhdmllczVAZ21haWwuY29tIn0.bdMN_JU8HUVqbu5XRPZhMD3K92GanN8Y4YpvLsjK1Bw1O5ykfUi1uqJSEenDO5DO4DHDvhvxT-ldoDdmSfRftMOcXQ9qpM7CXC92H27EGBMd4gmNh7oMPseNoTPvhf8FcpG0Zdem3JhHrddy9wQbkY9YGSrZS_s3FiK6HRkLRKnD0_HBrT1EuYjwqfcWblLvsv_fzOMATY-xsensKTPzI25A6Aqc8GWsur3WAXcHo0y-2FkI1L-6IfSn1t74ZazG2_xBGGUoJ7essYlKDzzSp3hbtM5rILtCydc94zDB5z6QLI0FiyBxZduw3DGvDQiMf82jM4tfeftSwjRR4uDV1A
+}
+
+body:json {
+  {
+    "ambassador": "/api/users/162",
+    "mission": "/api/missions/528",
+    "proofPath": "string",
+    "status": "submitted",
+    "rejectionReason": "string",
+    "admin": null,
+    "submissionDate": "2025-05-22T14:14:02.117Z"
+  }
 }
 
 script:post-response {
