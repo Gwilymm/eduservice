@@ -37,6 +37,13 @@
         </div>
       </template>
 
+      <!-- Bouton admin -->
+      <template v-else>
+        <div class="d-flex justify-center mt-4">
+          <v-btn class="admin-btn" color="primary" href="http://localhost/admin/login"> Accès administrateur </v-btn>
+        </div>
+      </template>
+
       <!-- Logos partenaires -->
       <div class="d-flex justify-center">
         <v-img :src="aftec" max-width="32" class="mr-2"></v-img>
@@ -81,6 +88,20 @@ function handleLogout() {
   background-color: #002b49;
   color: white;
   padding-bottom: 16px;
+}
+
+.admin-btn {
+  background-color: #4db1e1 !important;
+  color: white !important;
+  border-radius: 4px !important;
+  text-transform: none !important;
+  font-size: 13px !important;
+  height: auto !important;
+  padding: 8px 16px !important;
+  margin: 16px 0;
+  font-weight: normal !important;
+  min-width: 240px !important;
+  line-height: 1.2 !important;
 }
 
 .year-select {

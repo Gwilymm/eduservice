@@ -64,6 +64,16 @@ const router = createRouter({
       },
       component: () => import('../views/LoginView.vue'),
       meta: { requiresAuth: false }
+    },
+    {
+      path:'/rewards',
+      name: 'cadeaux',      
+      meta: {
+        title: "Cadeaux",
+        icon: "",
+        requiresAuth: true 
+      },
+      component: () => import('../views/RewardView.vue'),
     }
   ],
 })
