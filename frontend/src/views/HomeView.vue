@@ -46,7 +46,8 @@
           <v-row class="mt-4">
             <v-col cols="12" class="d-flex align-center">
               <v-icon color="red" icon="mdi-file-pdf-box" class="mr-2"></v-icon>
-              <a :href="fileUrl" download class="text-decoration-none mr-2">
+              <a :href="fileUrl" target="_blank" rel="noopener noreferrer" class="text-decoration-none mr-2"
+                @click.prevent="openPdfInNewTab">
                 Autorisation de diffusion d'image
               </a>
               <v-icon color="primary" icon="mdi-chevron-right" class="mr-2"></v-icon>
@@ -82,22 +83,11 @@
       </div>
 
       <div class="d-flex justify-space-between">
-        <v-btn
-          color="primary"
-          @click="viewMissionDetails"
-          :loading="loading"
-          class="text-none px-4"
-          prepend-icon="mdi-format-list-bulleted"
-        >
+        <v-btn color="primary" @click="viewMissionDetails" :loading="loading" class="text-none px-4"
+          prepend-icon="mdi-format-list-bulleted">
           Consulter le détail<br />de mes missions
         </v-btn>
-        <v-btn
-          color="primary"
-          @click="addMission"
-          :loading="loading"
-          class="text-none px-4"
-          prepend-icon="mdi-plus"
-        >
+        <v-btn color="primary" @click="addMission" :loading="loading" class="text-none px-4" prepend-icon="mdi-plus">
           Ajouter une mission
         </v-btn>
       </div>
@@ -115,6 +105,7 @@ import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
 import { useAuthStore } from '@/stores/auth'
 import { getCurrentUser } from '@/api/userService'
+import autorisationPdf from '@/assets/autorisation_diffusion.pdf'
 
 const auth = useAuthStore()
 const user = ref(null)
@@ -130,7 +121,6 @@ async function fetchUser() {
   loading.value = true
   try {
     user.value = await getCurrentUser()
-    console.log('user', user.value)
     // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
   } catch {
     snackbar.value = { show: true, text: 'Erreur de chargement des données de l\'utiliateur', color: 'error' }
@@ -139,19 +129,11 @@ async function fetchUser() {
   }
 }
 
-const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
+const fileUrl = ref(autorisationPdf)
 
-// const downloadAuthorization = async () => {
-//   try {
-//     loading.value = true
-//     await new Promise((resolve) => setTimeout(resolve, 300))
-//     showSuccess('Autorisation téléchargée avec succès')
-//   } catch (error) {
-//     showError("Erreur lors du téléchargement de l'autorisation")
-//   } finally {
-//     loading.value = false
-//   }
-// }
+const openPdfInNewTab = () => {
+  window.open(fileUrl.value, '_blank', 'noopener,noreferrer')
+}
 
 const viewMissionDetails = async () => {
   try {
@@ -195,7 +177,6 @@ const showSuccess = (message) => {
 
 onMounted(async () => {
   await fetchUser()
-  // await downloadAuthorization()
 })
 </script>
 
