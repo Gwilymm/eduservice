@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
@@ -53,6 +54,16 @@ class UserCrudController extends AbstractCrudController
 		return [
 			IdField::new('id')->hideOnForm(),
 			EmailField::new('email'),
+			EmailField::new('schoolMail', 'Email de l\'école')
+				->setHelp('Email de l\'école (ex: @my-digital-school.org)')
+				->setFormTypeOption('attr', [
+					'placeholder' => 'ex:@my-digital-school.org',
+					'pattern' => '^[a-zA-Z0-9._%+-]+@my-digital-school\.org$',
+					'title' => 'Doit être au format @my-digital-school.org',
+				])
+				->setRequired($pageName === Crud::PAGE_NEW)
+				->hideOnIndex(),
+			TextField::new('section', 'Section'),
 			TextField::new('firstName', 'Prénom'),
 			TextField::new('lastName', 'Nom'),
 			ArrayField::new('roles', 'Rôle')

@@ -107,12 +107,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <input type="hidden" name="_target_path" value="/admin" />
                 <button class="btn btn-primary" type="submit">Se connecter</button>
-                {% if admin_jwt %}
-                    <div style="margin: 1.5rem auto; max-width: 400px; word-break: break-all; background: #f8f9fa; color: #333; border-radius: 8px; padding: 1rem; font-size: 0.95rem;">
-                        <strong>Jeton JWT admin (pour appels API) :</strong><br>
-                        <code>{{ admin_jwt }}</code>
-                    </div>
-                {% endif %}
+
         </div>
         <div class="admin-login-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 48px; margin-bottom: 24px;">
             <img src="{{ asset('img/Logo Eduservices/Campus Caen_Bleu_Vertical.png') }}" alt="Eduservices" style="height: 38px;" loading="lazy" />
