@@ -6,27 +6,32 @@
 {% block stylesheets %}
     <style>
         body {
-            background: linear-gradient(135deg, var(--vt-c-light-blue) 0%, var(--vt-c-dark-blue) 100%);
+            background: linear-gradient(135deg, var(--vt-c-light-blue) 0%, var(--vt-c-white) 100%);
             color: var(--color-text);
             font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
         }
         .admin-login-container {
-            min-height: 100vh;
+            background: var(--vt-c-white);
+		  overflow: hidden;
+		  flex: wrap;
             display: flex;
+		  flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .admin-login-card {
-            background: var(--color-background);
+            background: var(--vt-c-dark-blue);
             border-radius: 18px;
             box-shadow: 0 8px 40px 0 rgba(44,62,80,0.18);
             padding: 2.5rem 2rem 2rem 2rem;
             max-width: 400px;
             width: 100%;
             border: 1.5px solid var(--vt-c-light-blue);
+		  shadow: 0 2px 8px 0 rgba(44,62,80,0.10);
+		  
         }
         .admin-login-title {
-            color: var(--vt-c-dark-blue);
+            color: var(--vt-c-white);
             font-size: 2.1rem;
             font-weight: 800;
             text-align: center;
@@ -34,19 +39,23 @@
             letter-spacing: 0.5px;
         }
         .form-label {
-            color: var(--vt-c-dark-blue);
+            color: var(--vt-c-white);
             font-weight: 600;
             margin-bottom: 0.3rem;
+            display: block;
         }
         .form-control {
             border-radius: 8px;
             border: 1.5px solid var(--vt-c-light-blue);
-            background: var(--color-background-mute);
-            color: var(--color-text);
+            background: var(--vt-c-white-soft);
+            color: var(--vt-c-black-soft);
             font-size: 1.08rem;
             padding: 0.75rem 1rem;
             margin-bottom: 1.2rem;
             transition: border 0.2s;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
         }
         .form-control:focus {
             border: 2px solid var(--vt-c-dark-blue);
@@ -83,21 +92,34 @@
 
 {% block body %}
     <div class="admin-login-container">
+    <div style="height: 100px; width: 100%;"></div>
         <div class="admin-login-card">
             <div class="admin-login-title">Connexion à l'administration</div>
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
             <form method="post" action="{{ path('admin_login') }}">
-                <label for="username" class="form-label">Email</label>
-                <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" required autofocus autocomplete="username">
-
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" name="_password" id="password" class="form-control" required autocomplete="current-password">
-
+                <div style="margin-bottom: 1.2rem;">
+                    <label for="username" class="form-label">Email</label>
+                    <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" required autofocus autocomplete="username">
+                </div>
+                <div style="margin-bottom: 1.2rem;">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" name="_password" id="password" class="form-control" required autocomplete="current-password">
+                </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <button class="btn btn-primary" type="submit">Se connecter</button>
             </form>
         </div>
+		<div class="admin-login-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 48px; margin-bottom: 24px;">
+			<img src="{{ asset('img/Logo Eduservices/Campus Caen_Bleu_Vertical.png') }}" alt="Eduservices" style="height: 38px;" loading="lazy" />
+			<img src="{{ asset('img/AFTEC.png') }}" alt="AFTEC" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/MBWAY.png') }}" alt="MBway" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/WIN.png') }}" alt="WIN" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/IHECF.png') }}" alt="IHECF" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/MDS.png') }}" alt="MyDigitalSchool" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/TUNON (2).png') }}" alt="TUNON" style="height: 32px;" loading="lazy" />
+			<img src="{{ asset('img/IBF.png') }}" alt="Ipac Bachelor Factory" style="height: 32px;" loading="lazy" />
+		</div>
     </div>
 {% endblock %}
