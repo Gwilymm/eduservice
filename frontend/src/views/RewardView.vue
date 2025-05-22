@@ -20,7 +20,9 @@
         <tr>
           <th class="text-left">Titre</th>
           <th class="text-center">Description</th>
-          <th class="text-center">Points requis</th>
+          <th class="text-center" @click="sortRewardsByPoints" style="cursor: pointer;">
+            Points requis
+          </th>
           <th class="text-center">Type</th>
         </tr>
       </thead>
@@ -30,11 +32,13 @@
             {{ reward.title }}
           </td>
           <td class="text-center">{{ reward.description }}</td>
-          <td class="text-center">{{ reward.minPoints }} points</td>
           <td class="text-center">
-            <v-chip :color="reward.type === 'unique' ? 'success' : 'info'" size="small" class="status-chip">
-              {{ reward.type === 'unique' ? 'Unique' : 'Standard' }}
+            <v-chip color="blue" size="small" class="status-chip">
+              {{ reward.minPoints }} points
             </v-chip>
+          </td>
+          <td class="text-center">
+            {{ reward.type === 'unique' ? 'Unique' : 'Standard' }}
           </td>
         </tr>
       </tbody>
@@ -66,6 +70,11 @@ const fetchRewards = async () => {
 
 const goBack = () => {
   router.back();
+};
+
+// Méthode pour trier les récompenses par points requis
+const sortRewardsByPoints = () => {
+  rewards.value.sort((a, b) => a.minPoints - b.minPoints);
 };
 
 onMounted(() => {
@@ -113,5 +122,13 @@ onMounted(() => {
 td {
   height: 48px !important;
   padding: 8px 16px !important;
+}
+
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background-color: #f0f0f0;
 }
 </style>
