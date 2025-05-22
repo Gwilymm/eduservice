@@ -169,7 +169,7 @@ const localForm = ref({
   firstName: formStore.form.firstName,
   lastName: formStore.form.lastName,
   school: formStore.form.school,
-  section: formStore.form.class, // Changed 'class' to 'section' and assigned value from formStore.form.class
+  section: formStore.form.class,
   email: formStore.form.email,
   schoolMail: formStore.form.schoolMail,
   phoneNumber: formStore.form.phoneNumber,
