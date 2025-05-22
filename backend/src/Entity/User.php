@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Mission;
 use App\Entity\Ranking;
 use App\Dto\Input\UserInput;
+use App\Dto\Input\UserUpdateInput;
 use App\State\UserProcessor;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
@@ -17,9 +18,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
 use Doctrine\Common\Collections\Collection;
+use App\Controller\Api\CurrentUserController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
@@ -41,9 +45,30 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             ),
 
         ),
-        new Get(),                // GET /api/users/{id}
+        new Get(
+            uriTemplate: '/me',
+            controller: CurrentUserController::class,
+            read: false,                                    // désactive le provider
+            security: "is_granted('ROLE_USER')",
+            normalizationContext: [
+                'groups' => ['user:read'],
+                'enable_max_depth' => true
+            ],
+            openapi: new Operation(
+                summary: 'Récupère l’utilisateur connecté',
+                description: 'Retourne les infos de l’utilisateur du token'
+            )
+        ),            // GET /api/users/{id}
         new GetCollection(),      // GET /api/users
-        new Patch(),              // PATCH /api/users/{id}
+        new Patch(
+            input: UserUpdateInput::class,
+            processor: UserProcessor::class,
+            denormalizationContext: ['groups' => ['user:update']],
+            openapi: new Operation(
+                summary: 'Mise à jour d\'un utilisateur',
+                description: 'Modification d\'un utilisateur avec possibilité de ne pas modifier le mot de passe'
+            )
+        ),
         new Delete(),
     ]
 )]
@@ -69,6 +94,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    // Propriété non persistée pour le mot de passe en clair
+    private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
@@ -99,6 +127,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user:read'])]
+    #[MaxDepth(1)]
     private ?School $school = null;
 
     public function __construct()
@@ -167,9 +197,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the plain password (non-persisted field)
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set the plain password (non-persisted field)
+     */
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
@@ -333,6 +381,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->schoolId = $schoolId;
         return $this;
+    }
+
+    #[Groups(['user:read'])]
+    #[SerializedName('schoolName')]
+    public function getSchoolName(): ?string
+    {
+        return $this->school?->getName();
     }
 
     public function getFullName(): string

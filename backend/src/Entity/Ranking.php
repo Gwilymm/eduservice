@@ -21,6 +21,9 @@ class Ranking
     #[ORM\ManyToOne(inversedBy: 'rankings')]
     private ?Challenge $challenge = null;
 
+    #[ORM\Column]
+    private int $points = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,25 @@ class Ranking
     public function setChallenge(?Challenge $challenge): static
     {
         $this->challenge = $challenge;
+
+        return $this;
+    }
+
+    public function getPoints(): int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): static
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function addPoints(int $points): static
+    {
+        $this->points += $points;
 
         return $this;
     }

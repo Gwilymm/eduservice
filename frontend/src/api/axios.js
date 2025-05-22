@@ -1,10 +1,13 @@
-import axios from 'axios';
+// src/api/axios.js
+import axios from 'axios'
+import { useAuthStore } from '@/stores/auth'
+import router from '@/router'
 
 /**
  * Configuration du client Axios pour les appels à l'API
- * - baseURL: http://localhost/api (pas de HTTPS, pas de port)
+ * - baseURL: défini par VITE_API_URL ou '/api'
  * - headers: configuration pour API Platform (JSON-LD)
- * - withCredentials: false (pas de cookies/auth pour l'instant)
+ * - withCredentials: false (pas de cookies/auth)
  */
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
@@ -14,29 +17,39 @@ const api = axios.create({
   },
   withCredentials: false,
   maxRedirects: 0,
-});
+})
 
-// Intercepteur pour ajouter le token d'authentification (si besoin plus tard)
+// Intercepteur pour ajouter le token d'authentification
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+  const auth = useAuthStore()
+  const token = auth.token
 
-// Intercepteur pour gérer les erreurs 401 (non autorisé)
-// Redirige vers la page de login si l'utilisateur n'est pas authentifié
-// et que la page actuelle n'est pas la page de login
+  // N’ajoute le header QUE si :
+  // 1) un token existe
+  // 2) l'URL de la requête ne contient pas '/login'
+  if (token && config.url && !config.url.includes('/login')) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
+  return config
+})
+
+// Intercepteur pour gérer les erreurs 401 (Unauthorized)
+// Si on reçoit un 401 et qu’on n’est pas déjà sur /login, on purge le token via le store et on redirige
 api.interceptors.response.use(
   response => response,
   error => {
-    if (error.response?.status === 401 && window.location.pathname !== '/login') {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
+    const status = error.response?.status
+    const isOnLogin = router.currentRoute.value.name === 'login'
 
-export default api;
+    if (status === 401 && !isOnLogin) {
+      const auth = useAuthStore()
+      auth.logout()            // vide token & state
+      router.push({ name: 'login' })
+    }
+
+    return Promise.reject(error)
+  }
+)
+
+export default api

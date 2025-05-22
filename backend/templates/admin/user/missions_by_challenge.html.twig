@@ -1,0 +1,75 @@
+{# templates/admin/user/missions_by_challenge.html.twig #}
+
+{# Récupération des soumissions de missions approuvées de l'utilisateur #}
+{% set approvedSubmissions = entity.missionSubmissions|filter(submission => submission.status.value == 'approved') %}
+
+{# Regrouper les missions par challenge #}
+{% set submissionsByChallenge = {} %}
+{% for submission in approvedSubmissions %}
+    {% set challengeId = submission.mission.challenge.id %}
+    {% set challengeName = submission.mission.challenge.academicYear %}
+    
+    {% if submissionsByChallenge[challengeId] is not defined %}
+        {% set submissionsByChallenge = submissionsByChallenge|merge({
+            (challengeId): {
+                'name': challengeName,
+                'submissions': []
+            }
+        }) %}
+    {% endif %}
+    
+    {% set submissionsByChallenge = submissionsByChallenge|merge({
+        (challengeId): {
+            'name': challengeName,
+            'submissions': submissionsByChallenge[challengeId].submissions|merge([submission])
+        }
+    }) %}
+{% endfor %}
+
+{# Affichage des missions par challenge #}
+{% if submissionsByChallenge|length > 0 %}
+    {% for challengeId, challenge in submissionsByChallenge %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Challenge : {{ challenge.name }}</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mission</th>
+                            <th>Points</th>
+                            <th>Date de soumission</th>
+                            <th>Date de validation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for submission in challenge.submissions %}
+                            <tr>
+                                <td>{{ submission.mission.name }}</td>
+                                <td><span class="badge bg-success">{{ submission.mission.points }}</span></td>
+                                <td>{{ submission.submissionDate|date('d/m/Y') }}</td>
+                                <td>{{ submission.validationDate|date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="1">Total</th>
+                            <th>
+                                <span class="badge bg-primary">
+                                    {{ challenge.submissions|reduce((sum, submission) => sum + submission.mission.points, 0) }}
+                                </span>
+                            </th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-info">
+        Cet utilisateur n'a pas encore de missions complétées.
+    </div>
+{% endif %}
