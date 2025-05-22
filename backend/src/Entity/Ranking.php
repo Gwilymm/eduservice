@@ -7,7 +7,9 @@ use App\Repository\RankingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RankingRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    security: "is_granted('ROLE_USER')",
+)]
 class Ranking
 {
     #[ORM\Id]

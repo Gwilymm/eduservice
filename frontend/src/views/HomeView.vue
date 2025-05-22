@@ -127,7 +127,7 @@
 </template>
 
 <script setup>
-import { computed,ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
 import { useAuthStore } from '@/stores/auth'
@@ -147,34 +147,24 @@ const snackbar = ref({
 async function fetchUser() {
   loading.value = true
   try {
-<<<<<<< HEAD
-    const userData = await getCurrentUser()
-    console.log('API user data:', userData)
-    user.value = userData
-    snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
-  } catch (error) {
-    console.error('Error loading user data:', error)
-    snackbar.value = { show: true, text: 'Erreur chargement user', color: 'error' }
-=======
     user.value = await getCurrentUser()
     // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
   } catch {
-    snackbar.value = { show: true, text: 'Erreur de chargement des données de l\'utiliateur', color: 'error' }
->>>>>>> origin/frontend-fixing-amandine
+    snackbar.value = {
+      show: true,
+      text: "Erreur de chargement des données de l'utiliateur",
+      color: 'error',
+    }
   } finally {
     loading.value = false
   }
 }
 
-<<<<<<< HEAD
-const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
-=======
 const displayDate = computed(() => {
   return user.value?.updatedPointsDate || new Date()
 })
 
 const fileUrl = ref(autorisationPdf)
->>>>>>> origin/frontend-fixing-amandine
 
 const openPdfInNewTab = () => {
   window.open(fileUrl.value, '_blank', 'noopener,noreferrer')
