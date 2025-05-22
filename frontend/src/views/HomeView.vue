@@ -22,7 +22,7 @@
                 <div>{{ user.lastName }}</div>
               </div>
               <div class="d-flex mb-2">
-                <div class="info-label">Mail :</div>
+                <div class="info-label">Mail personnel :</div>
                 <div>{{ user.email }}</div>
               </div>
               <div class="d-flex mb-2">
@@ -35,11 +35,11 @@
               </div>
               <div class="d-flex mb-2">
                 <div class="info-label">Classe :</div>
-                <div>{{ user.class }}</div>
+                <div>{{ user.class || 'Non définie' }}</div>
               </div>
               <div class="d-flex mb-2">
-                <div class="info-label">Mail :</div>
-                <div>{{ user.schoolMail }}</div>
+                <div class="info-label">Mail école :</div>
+                <div>{{ user.userIdentifier }}</div>
               </div>
             </v-col>
           </v-row>
@@ -129,38 +129,17 @@ const snackbar = ref({
 async function fetchUser() {
   loading.value = true
   try {
-    user.value = await getCurrentUser()
-    console.log('user', user.value)
+    const userData = await getCurrentUser()
+    console.log('API user data:', userData)
+    user.value = userData
     snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
-  } catch {
+  } catch (error) {
+    console.error('Error loading user data:', error)
     snackbar.value = { show: true, text: 'Erreur chargement user', color: 'error' }
   } finally {
     loading.value = false
   }
 }
-
-// Données en dur pour l'utilisateur
-const user2 = ref({
-  firstName: 'Lucas',
-  lastName: 'MARTIN',
-  email: 'lucas.martin@gmail.com',
-  phoneNumber: '07 08 09 10 11',
-  shcoolName: 'MyDigtialSchool',
-  class: 'DAD 2',
-  schoolMail: 'lucas.martin@my-digital-school.org',
-  isAuthorizationAccepted: true,
-  points: 268,
-  updatedPointsDate: '2024-01-10',
-  completedMissions: [
-    { id: 1, title: 'Mission 1', isCompleted: true },
-    { id: 2, title: 'Mission 2', isCompleted: true },
-    { id: 3, title: 'Mission 3', isCompleted: true },
-    { id: 4, title: 'Mission 4', isCompleted: true },
-  ],
-  giftPotential: 'Séjour à Disneyland',
-  rank: 2,
-  totalParticipants: 9,
-})
 
 const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
 
