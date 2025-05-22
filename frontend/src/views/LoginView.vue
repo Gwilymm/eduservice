@@ -153,8 +153,6 @@ const login = async () => {
       email: email.value,
       password: password.value,
     })
-    console.log('Réponse de connexion:', response)
-
     auth.login(response.token)
   } catch (e) {
     console.error('Erreur de connexion:', e)
