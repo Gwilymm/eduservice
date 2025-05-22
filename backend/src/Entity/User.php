@@ -70,6 +70,17 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             )
         ),
         new Delete(),
+        new Get(
+            uriTemplate: '/users/{id}',
+            normalizationContext: [
+                'groups' => ['user:read'],
+                'enable_max_depth' => true
+            ],
+            openapi: new Operation(
+                summary: 'Récupère un utilisateur',
+                description: 'Retourne les infos d’un utilisateur'
+            )
+        ),
     ]
 )]
 
