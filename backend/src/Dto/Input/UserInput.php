@@ -27,7 +27,7 @@ class UserInput
     public int $school; // ici on accepte l'ID brut
 
     #[Groups(['user:write'])]
-    public ?string $schoolMail = null;
+    public string $schoolMail;
 
     #[Groups(['user:write'])]
     public ?string $section = null;

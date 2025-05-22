@@ -40,6 +40,12 @@ class UserProcessor implements ProcessorInterface
             $user->setFirstName($data->firstName);
             $user->setLastName($data->lastName);
             $user->setPhoneNumber($data->phoneNumber);
+            if (property_exists($data, 'schoolMail')) {
+                $user->setSchoolMail($data->schoolMail);
+            }
+            if (property_exists($data, 'section')) {
+                $user->setSection($data->section);
+            }
 
             // Handle school relationship
             $school = $this->entityManager->getRepository(School::class)->find($data->school);
@@ -93,6 +99,12 @@ class UserProcessor implements ProcessorInterface
 
             if ($data->phoneNumber !== null) {
                 $user->setPhoneNumber($data->phoneNumber);
+            }
+            if (property_exists($data, 'schoolMail') && $data->schoolMail !== null) {
+                $user->setSchoolMail($data->schoolMail);
+            }
+            if (property_exists($data, 'section') && $data->section !== null) {
+                $user->setSection($data->section);
             }
 
             // Mise à jour de l'école si fournie
