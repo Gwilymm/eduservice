@@ -35,7 +35,7 @@
               </div>
               <div class="d-flex mb-2">
                 <div class="info-label">Classe :</div>
-                <div>{{ user.class || 'Non définie' }}</div>
+                <div>{{ user.section || 'Non définie' }}</div>
               </div>
               <div class="d-flex mb-2">
                 <div class="info-label">Mail école :</div>

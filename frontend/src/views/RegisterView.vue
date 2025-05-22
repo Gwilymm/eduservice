@@ -45,8 +45,8 @@
                     required
                   ></v-select>
                   <v-text-field
-                    v-model="localForm.class"
-                    label="Classe"
+                    v-model="localForm.section" 
+                    label="Classe" 
                     :rules="[rules.required]"
                     required
                   ></v-text-field>
@@ -66,10 +66,12 @@
                     required
                   ></v-text-field>
                   <v-text-field
-                    v-model="localForm.schoolEmail"
+                    v-model="localForm.schoolMail"
                     label="Mail école"
-                    :rules="[rules.required, rules.email]"
+                    :rules="[rules.required, rules.email]" 
                     required
+                    hint="Utilisez votre adresse email académique"
+                    persistent-hint
                   ></v-text-field>
                   <v-text-field
                     v-model="localForm.phoneNumber"
@@ -167,14 +169,14 @@ const localForm = ref({
   firstName: formStore.form.firstName,
   lastName: formStore.form.lastName,
   school: formStore.form.school,
-  class: formStore.form.class,
+  section: formStore.form.class, // Changed 'class' to 'section' and assigned value from formStore.form.class
   email: formStore.form.email,
-  schoolEmail: formStore.form.schoolEmail,
+  schoolMail: formStore.form.schoolMail,
   phoneNumber: formStore.form.phoneNumber,
   password: formStore.form.password || '',
   confirmPassword: formStore.form.confirmPassword || '',
   selectedMissions: formStore.form.selectedMissions.map((mission) => ({ ...mission })),
-})
+});
 
 watch(step, (newStep) => {
   formStore.updateStep(newStep)
@@ -196,15 +198,12 @@ onMounted(async () => {
     loadingSchools.value = true
     // Récupérer les écoles complètes avec leur id et name
     const fetchedSchools = await schoolService.getAllSchools()
-
+    
     if (fetchedSchools && fetchedSchools.length > 0) {
       schools.value = fetchedSchools
-    } else {
-      // Écoles de secours en cas d'échec
     }
   } catch (error) {
     console.error('Erreur lors du chargement des écoles:', error)
-    // Même en cas d'erreur, avoir quelques écoles pour que l'interface fonctionne
   } finally {
     loadingSchools.value = false
   }
