@@ -84,8 +84,9 @@
 
       <div class="d-flex justify-space-between">
         <v-btn color="primary" @click="viewMissionDetails" :loading="loading" class="text-none px-4"
-          prepend-icon="mdi-format-list-bulleted">
-          Consulter le détail<br />de mes missions
+          prepend-icon="mdi-format-list-bulleted" style="white-space: pre-line; line-height: 1.2;">
+          Consulter le détail
+          de mes missions
         </v-btn>
         <v-btn color="primary" @click="addMission" :loading="loading" class="text-none px-4" prepend-icon="mdi-plus">
           Ajouter une mission
