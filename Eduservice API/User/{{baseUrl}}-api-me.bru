@@ -6,8 +6,12 @@ meta {
 
 get {
   url: {{baseUrl}}/api/me
-  body: json
+  body: none
   auth: inherit
+}
+
+headers {
+  Authorization: {{Bearer}}
 }
 
 body:json {
