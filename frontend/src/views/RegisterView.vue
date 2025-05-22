@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container class="fill-height">
+    <v-row align="center" justify="center">
       <v-col>
         <v-form ref="formRef" v-model="isValid" lazy-validation>
           <v-stepper
