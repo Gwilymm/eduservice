@@ -59,22 +59,25 @@
 
       <div class="points-section mb-6">
         <div class="d-flex align-center">
-          <div class="text-h4 mr-4">{{ user.points }} points</div>
+          <div class="text-h4 mr-4">{{ user.points || 0 }} points</div>
           <v-icon size="x-large" icon="mdi-chevron-right"></v-icon>
           <v-icon size="x-large" color="primary" icon="mdi-gift" class="mx-2"></v-icon>
-          <div class="text-h5">{{ user.giftPotential }}</div>
+          <div class="text-h5">{{ user.giftPotential || 'Aucun' }}</div>
         </div>
         <div class="text-body-2 text-grey">
-          au {{ formatDate(user.updatedPointsDate) }}<br />
-          Pour
-          <!-- {{ user.completedMissions.length }} -->
+          au {{ formatDate(displayDate) }}<br />
+          Pour {{ user.completedMissions?.length || 0 }}
           missions réalisées
         </div>
       </div>
 
       <div class="ranking-section mb-6">
-        <div class="text-h5">
+        <div class="text-h5" v-if="user.rank">
           Classement général : {{ user.rank }} / {{ user.totalParticipants }}
+        </div>
+        <div v-else>
+          <span class="text-h5">Classement général :</span>
+           En cours de calcul
         </div>
         <div class="text-body-2 text-grey">
           Les points sont mentionnés à titre indicatif. La vérification des preuves et de la
@@ -101,7 +104,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed,ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
 import { useAuthStore } from '@/stores/auth'
@@ -129,6 +132,10 @@ async function fetchUser() {
     loading.value = false
   }
 }
+
+const displayDate = computed(() => {
+  return user.value?.updatedPointsDate || new Date()
+})
 
 const fileUrl = ref(autorisationPdf)
 
