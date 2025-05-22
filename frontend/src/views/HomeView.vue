@@ -60,7 +60,14 @@
         <div class="d-flex align-center">
           <div class="text-h4 mr-4">{{ user.points }} points</div>
           <v-icon size="x-large" icon="mdi-chevron-right"></v-icon>
-          <v-icon size="x-large" color="primary" icon="mdi-gift" class="mx-2"></v-icon>
+          <v-icon
+            size="x-large"
+            color="primary"
+            icon="mdi-gift"
+            class="mx-2"
+            @click="goToRewards"
+            style="cursor: pointer"
+          ></v-icon>
           <div class="text-h5">{{ user.giftPotential }}</div>
         </div>
         <div class="text-body-2 text-grey">
@@ -174,6 +181,18 @@ const addMission = async () => {
     await router.push('/missions/add')
   } catch (error) {
     showError("Erreur lors de la navigation vers l'ajout de mission")
+  } finally {
+    loading.value = false
+  }
+}
+
+const goToRewards = async () => {
+  try {
+    loading.value = true
+    await new Promise((resolve) => setTimeout(resolve, 300))
+    await router.push('/rewards')
+  } catch (error) {
+    showError('Erreur lors de la navigation vers les récompenses')
   } finally {
     loading.value = false
   }
