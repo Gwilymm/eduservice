@@ -60,8 +60,14 @@
                 density="comfortable"
                 variant="outlined"
                 bg-color="white"
-                type="password"
-              ></v-text-field>
+                :type="showPassword ? 'text' : 'password'"
+              >
+                <template v-slot:append-inner>
+                  <v-icon @click="showPassword = !showPassword">
+                    {{ showPassword ? 'mdi-eye-off' : 'mdi-eye' }}
+                  </v-icon>
+                </template>
+              </v-text-field>
             </div>
 
             <v-btn
@@ -124,6 +130,7 @@ const password = ref('')
 const loginError = ref('')
 const loading = ref(false)
 const auth = useAuthStore()
+const showPassword = ref(false)
 
 const emailRules = [
   (v) => !!v || "L'email est requis",
