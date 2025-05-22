@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import Mission from './Mission';  // Import du modèle Mission
+import Mission from '@/models/Mission';  // Import du modèle Mission
 import { ref, computed } from 'vue';
 
 export const useMissionStore = defineStore('mission', () => {
