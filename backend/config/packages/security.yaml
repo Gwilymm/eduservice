@@ -22,22 +22,10 @@ security:
         enable_csrf: true
       logout:
         path: app_logout
-        target: app_login
-      stateless: false
-    #    main:
-    #      lazy: true
-    #      provider: app_user_provider
-    #      form_login:
-    #        login_path: app_login
-    #        check_path: app_login
-    #        enable_csrf: true
-    #      logout:
-    #        path: app_logout
-    #      stateless: false
-    #      # entry_point: form_login
-    #
-    # activate different ways to authenticate
-    # https://symfony.com/doc/current/security.html#the-firewall
+      # entry_point: form_login
+
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#the-firewall
 
       # https://symfony.com/doc/current/security/impersonating_user.html
       # switch_user: true
@@ -45,12 +33,12 @@ security:
       pattern: ^/admin
       provider: app_user_provider
       form_login:
-        login_path: admin_login
-        check_path: admin_login
-        default_target_path: admin
+        login_path: app_login
+        check_path: app_login
+        enable_csrf: true
       logout:
-        path: admin_logout
-        target: admin_login
+        path: app_logout
+        target: app_login
       stateless: false
     login:
       pattern: ^/api/login
