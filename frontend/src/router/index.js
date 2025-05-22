@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { useAuthStore } from '@/stores/auth'
-import path from 'node:path'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,68 +9,67 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { requiresAuth: true }
-      // meta: {
-      //   title: "Login",
-      //   icon: "",
-      // }
+      meta: {
+        requiresAuth: true,
+        title: "Accueil - Eduservices"
+      }
     },
     {
       path: '/missions',
       name: 'missions',
       component: () => import('@/views/MissionsView.vue'),
-      meta: { requiresAuth: true }
+      meta: {
+        requiresAuth: true,
+        title: "Mes missions - Eduservices"
+      }
     },
     {
       path: '/missions/add',
       name: 'add-mission',
       component: () => import('@/views/AddMissionView.vue'),
-      meta: { requiresAuth: true }
+      meta: {
+        requiresAuth: true,
+        title: "Ajouter une mission - Eduservices"
+      }
 
     },
     {
       path: '/justifications',
       name: 'justifications',
       component: () => import('@/views/AddJustificationView.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-      meta: { requiresAuth: true }
-
+      meta: {
+        requiresAuth: true,
+        title: "Justifications - Eduservices"
+      }
     },
     {
       path: '/register',
       name: 'register',
       meta: {
-        title: "Register",
+        requiresAuth: false,
+        title: "S'inscrire - Eduservices",
         icon: "",
       },
       component: () => import('../views/RegisterView.vue'),
-      meta: { requiresAuth: false }
     },
     {
       path: '/login',
       name: 'login',
       meta: {
-        title: "Login",
+        requiresAuth: false,
+        title: "Se connecter - Eduservices",
         icon: "",
       },
       component: () => import('../views/LoginView.vue'),
       meta: { requiresAuth: false }
     },
     {
-      path:'/rewards',
-      name: 'cadeaux',      
+      path: '/rewards',
+      name: 'cadeaux',
       meta: {
         title: "Cadeaux",
         icon: "",
-        requiresAuth: true 
+        requiresAuth: true
       },
       component: () => import('../views/RewardView.vue'),
     }
@@ -81,6 +79,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
   const logged = auth.isLogged
+  const defaultTitle = 'Challenge Ambassadeur - Eduservices'
+  document.title = to.meta.title || defaultTitle
 
   // Routes protégées
   if (to.meta.requiresAuth && !logged) {

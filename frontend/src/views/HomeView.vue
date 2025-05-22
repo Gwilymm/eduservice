@@ -46,7 +46,13 @@
           <v-row class="mt-4">
             <v-col cols="12" class="d-flex align-center">
               <v-icon color="red" icon="mdi-file-pdf-box" class="mr-2"></v-icon>
-              <a :href="fileUrl" download class="text-decoration-none mr-2">
+              <a
+                :href="fileUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-decoration-none mr-2"
+                @click.prevent="openPdfInNewTab"
+              >
                 Autorisation de diffusion d'image
               </a>
               <v-icon color="primary" icon="mdi-chevron-right" class="mr-2"></v-icon>
@@ -58,7 +64,7 @@
 
       <div class="points-section mb-6">
         <div class="d-flex align-center">
-          <div class="text-h4 mr-4">{{ user.points }} points</div>
+          <div class="text-h4 mr-4">{{ user.points || 0 }} points</div>
           <v-icon size="x-large" icon="mdi-chevron-right"></v-icon>
           <v-icon
             size="x-large"
@@ -71,16 +77,19 @@
           <div class="text-h5">{{ user.giftPotential }}</div>
         </div>
         <div class="text-body-2 text-grey">
-          au {{ formatDate(user.updatedPointsDate) }}<br />
-          Pour
-          <!-- {{ user.completedMissions.length }} -->
+          au {{ formatDate(displayDate) }}<br />
+          Pour {{ user.completedMissions?.length || 0 }}
           missions réalisées
         </div>
       </div>
 
       <div class="ranking-section mb-6">
-        <div class="text-h5">
+        <div class="text-h5" v-if="user.rank">
           Classement général : {{ user.rank }} / {{ user.totalParticipants }}
+        </div>
+        <div v-else>
+          <span class="text-h5">Classement général :</span>
+          En cours de calcul
         </div>
         <div class="text-body-2 text-grey">
           Les points sont mentionnés à titre indicatif. La vérification des preuves et de la
@@ -95,8 +104,9 @@
           :loading="loading"
           class="text-none px-4"
           prepend-icon="mdi-format-list-bulleted"
+          style="white-space: pre-line; line-height: 1.2"
         >
-          Consulter le détail<br />de mes missions
+          Consulter le détail de mes missions
         </v-btn>
         <v-btn
           color="primary"
@@ -117,11 +127,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed,ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
 import { useAuthStore } from '@/stores/auth'
 import { getCurrentUser } from '@/api/userService'
+import autorisationPdf from '@/assets/autorisation_diffusion.pdf'
 
 const auth = useAuthStore()
 const user = ref(null)
@@ -136,6 +147,7 @@ const snackbar = ref({
 async function fetchUser() {
   loading.value = true
   try {
+<<<<<<< HEAD
     const userData = await getCurrentUser()
     console.log('API user data:', userData)
     user.value = userData
@@ -143,23 +155,29 @@ async function fetchUser() {
   } catch (error) {
     console.error('Error loading user data:', error)
     snackbar.value = { show: true, text: 'Erreur chargement user', color: 'error' }
+=======
+    user.value = await getCurrentUser()
+    // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
+  } catch {
+    snackbar.value = { show: true, text: 'Erreur de chargement des données de l\'utiliateur', color: 'error' }
+>>>>>>> origin/frontend-fixing-amandine
   } finally {
     loading.value = false
   }
 }
 
+<<<<<<< HEAD
 const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
+=======
+const displayDate = computed(() => {
+  return user.value?.updatedPointsDate || new Date()
+})
 
-const downloadAuthorization = async () => {
-  try {
-    loading.value = true
-    await new Promise((resolve) => setTimeout(resolve, 300))
-    showSuccess('Autorisation téléchargée avec succès')
-  } catch (error) {
-    showError("Erreur lors du téléchargement de l'autorisation")
-  } finally {
-    loading.value = false
-  }
+const fileUrl = ref(autorisationPdf)
+>>>>>>> origin/frontend-fixing-amandine
+
+const openPdfInNewTab = () => {
+  window.open(fileUrl.value, '_blank', 'noopener,noreferrer')
 }
 
 const viewMissionDetails = async () => {
@@ -216,7 +234,6 @@ const showSuccess = (message) => {
 
 onMounted(async () => {
   await fetchUser()
-  await downloadAuthorization()
 })
 </script>
 
