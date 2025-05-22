@@ -72,9 +72,9 @@
                     required
                   ></v-text-field>
                   <v-text-field
-                    v-model="localForm.phone"
+                    v-model="localForm.phoneNumber"
                     label="Téléphone portable"
-                    :rules="[rules.required, rules.phone]"
+                    :rules="[rules.required, rules.phoneNumber]"
                     required
                   ></v-text-field>
                   <v-text-field
@@ -170,7 +170,7 @@ const localForm = ref({
   class: formStore.form.class,
   email: formStore.form.email,
   schoolEmail: formStore.form.schoolEmail,
-  phone: formStore.form.phone,
+  phoneNumber: formStore.form.phoneNumber,
   password: formStore.form.password || '',
   confirmPassword: formStore.form.confirmPassword || '',
   selectedMissions: formStore.form.selectedMissions.map((mission) => ({ ...mission })),
@@ -217,7 +217,7 @@ const rules = {
   required: (v) => !!v || 'Ce champ est requis',
   email: (v) =>
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) || 'Adresse e-mail invalide',
-  phone: (v) => /^[0-9]{10}$/.test(v) || 'Le numéro doit contenir 10 chiffres',
+  phoneNumber: (v) => /^[0-9]{10}$/.test(v) || 'Le numéro doit contenir 10 chiffres',
   password: (v) =>
     /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v) ||
     'Le mot de passe doit contenir au moins 8 caractères dont 1 lettre et 1 chiffre',
