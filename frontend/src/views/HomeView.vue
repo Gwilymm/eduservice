@@ -136,13 +136,11 @@ const snackbar = ref({
 async function fetchUser() {
   loading.value = true
   try {
-    const userData = await getCurrentUser()
-    console.log('API user data:', userData)
-    user.value = userData
-    snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
-  } catch (error) {
-    console.error('Error loading user data:', error)
-    snackbar.value = { show: true, text: 'Erreur chargement user', color: 'error' }
+    user.value = await getCurrentUser()
+    console.log('user', user.value)
+    // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
+  } catch {
+    snackbar.value = { show: true, text: 'Erreur de chargement des données de l\'utiliateur', color: 'error' }
   } finally {
     loading.value = false
   }
@@ -150,17 +148,17 @@ async function fetchUser() {
 
 const fileUrl = ref('https://example.com/autorisation_diffusion.pdf')
 
-const downloadAuthorization = async () => {
-  try {
-    loading.value = true
-    await new Promise((resolve) => setTimeout(resolve, 300))
-    showSuccess('Autorisation téléchargée avec succès')
-  } catch (error) {
-    showError("Erreur lors du téléchargement de l'autorisation")
-  } finally {
-    loading.value = false
-  }
-}
+// const downloadAuthorization = async () => {
+//   try {
+//     loading.value = true
+//     await new Promise((resolve) => setTimeout(resolve, 300))
+//     showSuccess('Autorisation téléchargée avec succès')
+//   } catch (error) {
+//     showError("Erreur lors du téléchargement de l'autorisation")
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
 const viewMissionDetails = async () => {
   try {
@@ -216,7 +214,7 @@ const showSuccess = (message) => {
 
 onMounted(async () => {
   await fetchUser()
-  await downloadAuthorization()
+  // await downloadAuthorization()
 })
 </script>
 
