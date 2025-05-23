@@ -22,11 +22,24 @@ class MissionSubmissionCrudController extends AbstractCrudController
 
 	public function configureFields(string $pageName): iterable
 	{
+		$missionsField = AssociationField::new('mission', 'Mission')
+			->setFormTypeOption('choice_label', 'name')
+			->setQueryBuilder(function ($queryBuilder) {
+				// $queryBuilder est déjà un QueryBuilder, il ne faut pas appeler createQueryBuilder dessus
+				$now = new \DateTimeImmutable();
+				$queryBuilder
+					->join('m.challenge', 'c')
+					->where('c.missionEnd >= :now')
+					->andWhere('c.missionEnd < :nextYear')
+					->setParameter('now', (new \DateTimeImmutable('first day of January this year'))->setTime(0, 0))
+					->setParameter('nextYear', (new \DateTimeImmutable('first day of January next year'))->setTime(0, 0));
+				return $queryBuilder;
+			});
+
 		return [
 			IdField::new('id')->hideOnForm(),
 
-			AssociationField::new('mission', 'Mission')
-				->setFormTypeOption('choice_label', 'name'),
+			$missionsField,
 
 			AssociationField::new('ambassador', 'Ambassadeur')
 				->formatValue(function ($value, $entity) {
