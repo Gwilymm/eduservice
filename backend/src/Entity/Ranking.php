@@ -3,12 +3,22 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use App\Repository\RankingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RankingRepository::class)]
 #[ApiResource(
-    security: "is_granted('ROLE_USER')",
+    operations: [
+        new GetCollection(
+            uriTemplate: '/challenges/{id}/rankings',
+            security: "is_granted('ROLE_ADMIN')",
+        ),
+        new Get(
+            security: "object.getAmbassador() == user or is_granted('ROLE_ADMIN')"
+        )
+    ]
 )]
 class Ranking
 {

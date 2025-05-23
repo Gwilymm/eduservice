@@ -28,6 +28,38 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 	{
 		$faker = FakerFactory::create('fr_FR');
 
+		// Création d'un compte admin générique
+		$admin = new User();
+		$admin->setEmail('admin@eduservice.fr');
+		$admin->setRoles(['ROLE_ADMIN']);
+		$admin->setFirstName('Admin');
+		$admin->setLastName('Test');
+		$admin->setPhoneNumber('0600000000');
+		$admin->setSchool($this->getReference(SchoolFixtures::AFTEC, School::class));
+		$admin->setSchoolmail('admin@aftec.fr');
+		$admin->setSection('A1');
+		$plainPassword = 'Admin1234'; // Majuscule, minuscule, chiffre
+		$hashedPassword = $this->passwordHasher->hashPassword($admin, $plainPassword);
+		$admin->setPassword($hashedPassword);
+		$manager->persist($admin);
+		$this->addReference('admin_test', $admin);
+
+		// Création d'un compte user générique
+		$user = new User();
+		$user->setEmail('user@eduservice.fr');
+		$user->setRoles(['ROLE_USER']);
+		$user->setFirstName('User');
+		$user->setLastName('Test');
+		$user->setPhoneNumber('0600000001');
+		$user->setSchool($this->getReference(SchoolFixtures::AFTEC, School::class));
+		$user->setSchoolmail('user@aftec.fr');
+		$user->setSection('A1');
+		$plainPassword = 'User1234'; // Majuscule, minuscule, chiffre
+		$hashedPassword = $this->passwordHasher->hashPassword($user, $plainPassword);
+		$user->setPassword($hashedPassword);
+		$manager->persist($user);
+		$this->addReference('user_test', $user);
+
 		// Créer un administrateur par école
 		foreach (SchoolFixtures::REFERENCES as $schoolRef) {
 			$admin = new User();
@@ -37,19 +69,16 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 			$admin->setLastName($faker->lastName());
 			$admin->setPhoneNumber($faker->phoneNumber());
 
-			// Récupère l'école depuis les références de SchoolFixtures
-			// Correction: passer le nom de classe comme second paramètre à getReference
 			$school = $this->getReference($schoolRef, School::class);
 			$admin->setSchool($school);
+			$admin->setSchoolmail(sprintf('admin.%s@%s.fr', strtolower($schoolRef), strtolower($schoolRef)));
+			$admin->setSection('A1');
 
-			// Définir un mot de passe hashé
-			$plainPassword = 'password'; // En prod, utiliser un mot de passe plus sécurisé
+			$plainPassword = 'Admin1234';
 			$hashedPassword = $this->passwordHasher->hashPassword($admin, $plainPassword);
 			$admin->setPassword($hashedPassword);
 
 			$manager->persist($admin);
-
-			// Enregistrer la référence pour l'admin
 			$this->addReference(self::ADMIN_USER . '_' . $schoolRef, $admin);
 
 			// Créer 4 à 8 ambassadeurs par école
@@ -72,15 +101,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 				$ambassador->setRoles(['ROLE_AMBASSADOR']);
 				$ambassador->setPhoneNumber($faker->phoneNumber());
 				$ambassador->setSchool($school);
+				$ambassador->setSchoolmail(strtolower(sprintf('%s.%s@%s.fr', $firstName, $lastName, strtolower($schoolRef))));
+				$ambassador->setSection('A1');
 
-				// Définir un mot de passe hashé
-				$plainPassword = 'password'; // En prod, utiliser un mot de passe plus sécurisé
+				$plainPassword = 'User1234';
 				$hashedPassword = $this->passwordHasher->hashPassword($ambassador, $plainPassword);
 				$ambassador->setPassword($hashedPassword);
 
 				$manager->persist($ambassador);
-
-				// Enregistrer la référence pour l'ambassadeur
 				$this->addReference(self::AMBASSADOR_PREFIX . $schoolRef . '_' . $i, $ambassador);
 			}
 		}
