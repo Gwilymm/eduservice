@@ -56,6 +56,7 @@ class DashboardController extends AbstractDashboardController
 
         // Lien vers la partie frontend
         yield MenuItem::section('Liens');
-        yield MenuItem::linkToRoute('Retour au site', 'fa fa-undo', 'api_entrypoint');
+        yield MenuItem::linkToUrl('Retour au site', 'fa fa-undo', 'http://localhost:5173')
+            ->setLinkTarget('_blank');
     }
 }

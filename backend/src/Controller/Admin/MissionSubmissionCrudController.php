@@ -12,6 +12,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Doctrine\ORM\EntityManagerInterface;
 
 class MissionSubmissionCrudController extends AbstractCrudController
 {
@@ -74,5 +79,36 @@ class MissionSubmissionCrudController extends AbstractCrudController
 				})
 				->hideOnIndex(),
 		];
+	}
+
+	public function configureActions(Actions $actions): Actions
+	{
+		$approve = Action::new('approve', 'Approuver', 'fa fa-check')
+			->linkToCrudAction('approveSubmission')
+			->addCssClass('btn-success')
+			->displayIf(function ($entity) {
+				return $entity->getStatus() !== MissionSubmissionStatus::APPROVED;
+			}); // Pas de displayAsButton, EasyAdmin place le bouton dans la colonne si pas de section
+
+		return $actions
+			->add(Action::INDEX, $approve)
+			->add(Action::DETAIL, $approve);
+	}
+
+	public function approveSubmission(AdminUrlGenerator $adminUrlGenerator, EntityManagerInterface $em)
+	{
+		$id = $this->getContext()->getRequest()->query->get('entityId');
+		$submission = $em->getRepository(MissionSubmission::class)->find($id);
+		if ($submission) {
+			if (is_string(MissionSubmissionStatus::APPROVED)) {
+				$submission->setStatus(MissionSubmissionStatus::from('approved'));
+			} else {
+				$submission->setStatus(MissionSubmissionStatus::APPROVED);
+			}
+			$em->flush();
+			$this->addFlash('success', 'Mission approuvée !');
+		}
+		$url = $adminUrlGenerator->setController(self::class)->setAction(Action::INDEX)->generateUrl();
+		return new RedirectResponse($url);
 	}
 }
