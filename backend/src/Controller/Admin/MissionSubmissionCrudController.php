@@ -25,7 +25,7 @@ class MissionSubmissionCrudController extends AbstractCrudController
 		$missionsField = AssociationField::new('mission', 'Mission')
 			->setFormTypeOption('choice_label', 'name')
 			->setQueryBuilder(function ($queryBuilder) {
-				 // Correction : le root alias est 'entity' dans EasyAdmin
+				// Correction : le root alias est 'entity' dans EasyAdmin
 				$now = new \DateTimeImmutable();
 				$queryBuilder
 					->join('entity.challenge', 'c')

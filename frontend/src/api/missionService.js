@@ -21,6 +21,8 @@ export async function getAllMissions(params = { page: 1 }) {
 	}
 }
 
+
+
 /**
  * Récupère une mission par son ID
  * @param {string|number} id - ID de la mission à récupérer
@@ -82,10 +84,35 @@ export async function deleteMission(id) {
 	}
 }
 
+/**
+ * Récupère les missions du challenge en cours (ex: 2024/2025)
+ * @returns {Promise} - Réponse de l'API
+ */
+export async function getCurrentChallengeMissions() {
+	try {
+		// 1. Récupérer le challenge en cours (ex: missionEnd > now)
+		const challenges = await api.get('/challenges');
+		const now = new Date();
+		const currentChallenge = challenges.data[ 'hydra:member' ]
+			.find(c => {
+				const end = new Date(c.missionEnd);
+				return end > now;
+			});
+		if (!currentChallenge) throw new Error('Aucun challenge en cours trouvé');
+		// 2. Récupérer les missions de ce challenge
+		const missions = await api.get(`/missions?challenge=${currentChallenge[ '@id' ]}`);
+		return missions.data;
+	} catch (error) {
+		console.error('Erreur lors de la récupération des missions du challenge en cours:', error);
+		throw error;
+	}
+}
+
 export default {
 	getAllMissions,
 	getMissionById,
 	createMission,
 	updateMission,
-	deleteMission
+	deleteMission,
+	getCurrentChallengeMissions
 };

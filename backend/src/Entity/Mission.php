@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Enum\ChallengeStatus;
 use App\Repository\MissionRepository;
@@ -12,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MissionRepository::class)]
 #[ApiResource(security: "is_granted('ROLE_USER')",)]
+#[ApiFilter(SearchFilter::class, properties: ['challenge' => 'exact'])]
 class Mission
 {
     #[ORM\Id]
