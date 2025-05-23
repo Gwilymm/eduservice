@@ -35,20 +35,24 @@
               hide-details class="mission-checkbox">
               <template #label>
                 <div class="d-flex align-center gap-2">
-                  <v-tooltip location="top">
-                    <template #activator="{ props }">
-                      <span v-bind="props" class="font-weight-medium text-body-1">
-                        {{ mission.name }}
-                      </span>
-                    </template>
-                    <span>{{ mission.description }}</span>
-                  </v-tooltip>
+                  <span v-if="mission.description" class="font-weight-medium text-body-1">
+                    <v-tooltip location="right">
+                      <template #activator="{ props }">
+                        <span v-bind="props">{{ mission.name }}</span>
+                      </template>
+                      <span class="tooltip-description">{{ mission.description }}</span>
+                    </v-tooltip>
+                  </span>
+                  <span v-else class="font-weight-medium text-body-1">
+                    {{ mission.name }}
+                  </span>
 
                   <v-chip size="x-small" color="blue-lighten-4" text-color="blue-darken-4" variant="flat">
                     {{ mission.points }} pts
                   </v-chip>
                 </div>
               </template>
+
             </v-checkbox>
           </v-col>
         </v-row>
@@ -185,5 +189,12 @@ availableMissions.value.forEach(mission => {
 
 .gap-2 {
   gap: 8px;
+}
+
+.tooltip-description {
+  max-width: 50vw;
+  display: inline-block;
+  white-space: normal;
+  word-break: break-word;
 }
 </style>
