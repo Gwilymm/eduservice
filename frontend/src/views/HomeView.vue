@@ -46,13 +46,8 @@
           <v-row class="mt-4">
             <v-col cols="12" class="d-flex align-center">
               <v-icon color="red" icon="mdi-file-pdf-box" class="mr-2"></v-icon>
-              <a
-                :href="fileUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-decoration-none mr-2"
-                @click.prevent="openPdfInNewTab"
-              >
+              <a :href="fileUrl" target="_blank" rel="noopener noreferrer" class="text-decoration-none mr-2"
+                @click.prevent="openPdfInNewTab">
                 Autorisation de diffusion d'image
               </a>
               <v-icon color="primary" icon="mdi-chevron-right" class="mr-2"></v-icon>
@@ -64,16 +59,10 @@
 
       <div class="points-section mb-6">
         <div class="d-flex align-center">
-          <div class="text-h4 mr-4">{{ user.points || 0 }} points</div>
+          <div class="text-h4 mr-4">{{ ranking?.points || 0 }} points</div>
           <v-icon size="x-large" icon="mdi-chevron-right"></v-icon>
-          <v-icon
-            size="x-large"
-            color="primary"
-            icon="mdi-gift"
-            class="mx-2"
-            @click="goToRewards"
-            style="cursor: pointer"
-          ></v-icon>
+          <v-icon size="x-large" color="primary" icon="mdi-gift" class="mx-2" @click="goToRewards"
+            style="cursor: pointer"></v-icon>
           <div class="text-h5">{{ user.giftPotential }}</div>
         </div>
         <div class="text-body-2 text-grey">
@@ -84,8 +73,8 @@
       </div>
 
       <div class="ranking-section mb-6">
-        <div class="text-h5" v-if="user.rank">
-          Classement général : {{ user.rank }} / {{ user.totalParticipants }}
+        <div class="text-h5" v-if="ranking">
+          Classement général : {{ ranking?.rank }} / {{ ranking?.totalParticipants }}
         </div>
         <div v-else>
           <span class="text-h5">Classement général :</span>
@@ -98,23 +87,11 @@
       </div>
 
       <div class="d-flex justify-space-between">
-        <v-btn
-          color="primary"
-          @click="viewMissionDetails"
-          :loading="loading"
-          class="text-none px-4"
-          prepend-icon="mdi-format-list-bulleted"
-          style="white-space: pre-line; line-height: 1.2"
-        >
+        <v-btn color="primary" @click="viewMissionDetails" :loading="loading" class="text-none px-4"
+          prepend-icon="mdi-format-list-bulleted" style="white-space: pre-line; line-height: 1.2">
           Consulter le détail de mes missions
         </v-btn>
-        <v-btn
-          color="primary"
-          @click="addMission"
-          :loading="loading"
-          class="text-none px-4"
-          prepend-icon="mdi-plus"
-        >
+        <v-btn color="primary" @click="addMission" :loading="loading" class="text-none px-4" prepend-icon="mdi-plus">
           Ajouter une mission
         </v-btn>
       </div>
@@ -130,11 +107,10 @@
 import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
-import { useAuthStore } from '@/stores/auth'
 import { getCurrentUser } from '@/api/userService'
 import autorisationPdf from '@/assets/autorisation_diffusion.pdf'
+import { getMyRanking } from '@/api/rankingService'
 
-const auth = useAuthStore()
 const user = ref(null)
 const router = useRouter()
 const loading = ref(false)
@@ -143,12 +119,13 @@ const snackbar = ref({
   text: '',
   color: 'success',
 })
+const ranking = ref(null)
 
 async function fetchUser() {
   loading.value = true
   try {
     user.value = await getCurrentUser()
-    // snackbar.value = { show: true, text: 'Données chargées', color: 'success' }
+    ranking.value = await getMyRanking()
   } catch {
     snackbar.value = {
       show: true,
