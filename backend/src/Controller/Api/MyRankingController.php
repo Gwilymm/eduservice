@@ -66,4 +66,65 @@ class MyRankingController extends AbstractController
 			'totalParticipants' => $totalParticipants
 		]);
 	}
+
+	#[Route('/api/my-current-ranking', name: 'api_my_current_ranking', methods: ['GET'])]
+	#[IsGranted('ROLE_USER')]
+	public function myCurrentRanking(EntityManagerInterface $em): JsonResponse
+	{
+		$user = $this->getUser();
+		// Récupérer le challenge en cours (missionEnd > now)
+		$now = new \DateTimeImmutable();
+		$challenge = $em->getRepository(Challenge::class)
+			->createQueryBuilder('c')
+			->where('c.missionEnd > :now')
+			->orderBy('c.missionEnd', 'ASC')
+			->setParameter('now', $now)
+			->setMaxResults(1)
+			->getQuery()
+			->getOneOrNullResult();
+		if (!$challenge) {
+			return $this->json(['error' => 'No current challenge'], 404);
+		}
+		// ...copie la logique du ranking existant...
+		$qb = $em->createQueryBuilder();
+		$qb->select('SUM(m.points) as totalPoints')
+			->from(MissionSubmission::class, 'ms')
+			->join('ms.mission', 'm')
+			->where('ms.ambassador = :user')
+			->andWhere('ms.status = :status')
+			->andWhere('m.challenge = :challenge')
+			->setParameter('user', $user)
+			->setParameter('status', MissionSubmissionStatus::APPROVED)
+			->setParameter('challenge', $challenge);
+		$totalPoints = (int)($qb->getQuery()->getSingleScalarResult() ?? 0);
+
+		$qb2 = $em->createQueryBuilder();
+		$qb2->select('a.id, SUM(m.points) as points')
+			->from(MissionSubmission::class, 'ms')
+			->join('ms.mission', 'm')
+			->join('ms.ambassador', 'a')
+			->where('ms.status = :status')
+			->andWhere('m.challenge = :challenge')
+			->groupBy('a.id')
+			->orderBy('points', 'DESC')
+			->setParameter('status', MissionSubmissionStatus::APPROVED)
+			->setParameter('challenge', $challenge);
+		$results = $qb2->getQuery()->getResult();
+		$rank = null;
+		foreach ($results as $i => $row) {
+			if ($row['id'] == $user->getId()) {
+				$rank = $i + 1;
+				break;
+			}
+		}
+		$totalParticipants = count($results);
+
+		return $this->json([
+			'points' => $totalPoints,
+			'rank' => $rank,
+			'totalParticipants' => $totalParticipants,
+			'challengeId' => $challenge->getId(),
+			'academicYear' => $challenge->getAcademicYear(),
+		]);
+	}
 }
