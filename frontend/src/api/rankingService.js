@@ -82,6 +82,20 @@ export async function deleteRanking(id) {
 	}
 }
 
+/**
+ * Récupère le classement de l'utilisateur
+ * @returns {Promise} - Réponse de l'API
+ */
+export async function getMyRanking() {
+	try {
+		const response = await api.get('/my-current-ranking');
+		return response.data;
+	} catch (error) {
+		console.error('Erreur lors de la récupération du classement :', error);
+		throw error;
+	}
+}
+
 export default {
 	getAllRankings,
 	getRankingById,

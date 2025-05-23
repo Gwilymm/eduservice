@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import Mission from '@/models/Mission';
-import { getAllMissions } from '@/api/missionService';
+import { getAllMissions, getCurrentChallengeMissions } from '@/api/missionService';
 import { ref, computed } from 'vue';
 
 export const useMissionStore = defineStore('mission', () => {
@@ -14,9 +14,9 @@ export const useMissionStore = defineStore('mission', () => {
   async function fetchMissions(params = { page: 1 }) {
     loading.value = true;
     error.value = null;
-    
+
     try {
-      const response = await getAllMissions(params);
+      const response = await getCurrentChallengeMissions();
       const missionsData = response.data || response;
       missions.value = missionsData.member.map(missionData => new Mission(
         missionData.id,
@@ -29,7 +29,7 @@ export const useMissionStore = defineStore('mission', () => {
         missionData.maxRepetitions,
         missionData.status
       ));
-      
+
       return missions.value;
     } catch (err) {
       error.value = err.message || 'Erreur lors de la récupération des missions';
