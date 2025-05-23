@@ -58,12 +58,11 @@
       </v-card>
 
       <div class="points-section mb-6">
-        <div class="d-flex align-center">
+        <div class="d-flex align-center w-full justify-center">
           <div class="text-h4 mr-4">{{ ranking?.points || 0 }} points</div>
           <v-icon size="x-large" icon="mdi-chevron-right"></v-icon>
-          <v-icon size="x-large" color="primary" icon="mdi-gift" class="mx-2" @click="goToRewards"
-            style="cursor: pointer"></v-icon>
-          <div class="text-h5">{{ user.giftPotential }}</div>
+          <v-icon size="x-large" color="primary" icon="mdi-gift" class="mx-2" style="cursor: pointer"></v-icon>
+          <div class="text-h5">{{ gift?.title || "En cours de calcul" }}</div>
         </div>
         <div class="text-body-2 text-grey">
           au {{ formatDate(displayDate) }}<br />
@@ -91,6 +90,9 @@
           prepend-icon="mdi-format-list-bulleted" style="white-space: pre-line; line-height: 1.2">
           Consulter le détail de mes missions
         </v-btn>
+        <v-btn color="primary" @click="goToRewards" :loading="loading" class="text-none px-4" prepend-icon="mdi-gift">
+          Voir les cadeaux
+        </v-btn>
         <v-btn color="primary" @click="addMission" :loading="loading" class="text-none px-4" prepend-icon="mdi-plus">
           Ajouter une mission
         </v-btn>
@@ -110,6 +112,7 @@ import { formatDate } from '@/utils/dateUtils'
 import { getCurrentUser } from '@/api/userService'
 import autorisationPdf from '@/assets/autorisation_diffusion.pdf'
 import { getMyRanking } from '@/api/rankingService'
+import { getRewardForPoints } from '@/api/rewardService'
 
 const user = ref(null)
 const router = useRouter()
@@ -120,12 +123,14 @@ const snackbar = ref({
   color: 'success',
 })
 const ranking = ref(null)
+const gift = ref(null)
 
 async function fetchUser() {
   loading.value = true
   try {
     user.value = await getCurrentUser()
     ranking.value = await getMyRanking()
+    gift.value = await getRewardForPoints(ranking.value.points)
   } catch {
     snackbar.value = {
       show: true,
